@@ -6,7 +6,7 @@ const imageOptions = {
   widths: [256],
   formats: ["jpeg", "webp"],
   outputDir: "_site/img/thumbnails",
-  urlPath: "/found/img/thumbnails",  // Updated for GitHub Pages
+  urlPath: "/img/thumbnails",  // Updated for GitHub Pages
   filenameFormat: (id, src, width, format) => {
     const extension = path.extname(src);
     const name = path.basename(src, extension);
@@ -60,7 +60,7 @@ module.exports = function(eleventyConfig) {
 
             return {
               name: file,
-              path: `/found/images/${folder}/${file}`,
+              path: `/images/${folder}/${file}`,
               thumbnail: {
                 webp: imageData.webp.url,
                 jpeg: imageData.jpeg.url,
