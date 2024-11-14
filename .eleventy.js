@@ -6,7 +6,7 @@ const imageOptions = {
   widths: [256],
   formats: ["jpeg", "webp"],
   outputDir: "_site/img/thumbnails",
-  urlPath: "/The-Found/img/thumbnails",  // Updated for GitHub Pages
+  urlPath: "/found/img/thumbnails",  // Updated for GitHub Pages
   filenameFormat: (id, src, width, format) => {
     const extension = path.extname(src);
     const name = path.basename(src, extension);
