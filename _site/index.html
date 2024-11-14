@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Collection of my design work since 2007, presented without commentary.">
+    <meta name="theme-color" content="#F7F7F7">
+    <title>The Found*</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-background: #F7F7F7;
+            --color-brand: #EB5503;
+            --color-text: #141414;
+            --spacing-base: 16px;
+            --spacing-double: 32px;
+            --grid-item-size: 128px;
+            --font-size-base: 12px;
+            --font-size-large: 16px;
+        }
+
+        /* Reset and base styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Silkscreen', sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.2;
+            padding: var(--spacing-double);
+            margin: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-size: var(--font-size-large);
+            font-weight: 700;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        /* Layout Components */
+        .controls {
+            padding: var(--spacing-base);
+            padding-top: 0;
+            margin-bottom: var(--spacing-double);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .controls h1 {
+            margin: 0;
+        }
+
+        .folder {
+            margin-bottom: var(--spacing-double);
+        }
+
+        .folder-title {
+            padding: 0 var(--spacing-base);
+            margin-bottom: var(--spacing-base);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+            gap: var(--spacing-double);
+            padding: 0 var(--spacing-base);
+        }
+
+        .item {
+            aspect-ratio: 1;
+            background-color: #eee;
+            transition: transform 0.2s ease;
+        }
+
+        .item-link {
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+
+        .item-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item-link:focus-visible {
+            outline: 4px solid var(--color-brand);
+            outline-offset: 4px;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--spacing-double) var(--spacing-base);
+            text-align: left;
+        }
+
+        footer a {
+            text-decoration: underline;
+        }
+
+        footer a:hover,
+        footer a:focus-visible {
+            color: var(--color-brand);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-base: 12px;
+                --spacing-double: 24px;
+            }
+
+            body {
+                padding: var(--spacing-base);
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-base);
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-base);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .item {
+                transition: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="controls">
+    <h1>The Found*</h1>
+    Collection of my design work since 2007, presented without commentary.
+</header>
+<main><section class="folder" aria-labelledby="folder-2024">
+        <h2 id="folder-2024" class="folder-title">2024</h2>
+        <div class="items grid" role="list"><article class="item" role="listitem">
+                <a href="/images/2024/akasha-round.png" title="View akasha-round.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/akasha-round-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/akasha-round-256.jpeg" 
+                            alt="Thumbnail of akasha-round.png"
+                            width="256"
+                            height="166"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/akasha-text.png" title="View akasha-text.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/akasha-text-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/akasha-text-256.jpeg" 
+                            alt="Thumbnail of akasha-text.png"
+                            width="256"
+                            height="134"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/akashamittayi-photo.png" title="View akashamittayi-photo.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/akashamittayi-photo-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/akashamittayi-photo-256.jpeg" 
+                            alt="Thumbnail of akashamittayi-photo.png"
+                            width="256"
+                            height="134"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/food-plan-home-multi.png" title="View food-plan-home-multi.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/food-plan-home-multi-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/food-plan-home-multi-256.jpeg" 
+                            alt="Thumbnail of food-plan-home-multi.png"
+                            width="256"
+                            height="192"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/food-plan-home.png" title="View food-plan-home.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/food-plan-home-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/food-plan-home-256.jpeg" 
+                            alt="Thumbnail of food-plan-home.png"
+                            width="256"
+                            height="192"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/ham-car-nandu.png" title="View ham-car-nandu.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/ham-car-nandu-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/ham-car-nandu-256.jpeg" 
+                            alt="Thumbnail of ham-car-nandu.png"
+                            width="256"
+                            height="129"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/ham-nandu.png" title="View ham-nandu.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/ham-nandu-140.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/ham-nandu-140.jpeg" 
+                            alt="Thumbnail of ham-nandu.png"
+                            width="140"
+                            height="300"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/payyan-icon.png" title="View payyan-icon.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/payyan-icon-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/payyan-icon-256.jpeg" 
+                            alt="Thumbnail of payyan-icon.png"
+                            width="256"
+                            height="256"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/payyan-ui-expand.png" title="View payyan-ui-expand.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/payyan-ui-expand-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/payyan-ui-expand-256.jpeg" 
+                            alt="Thumbnail of payyan-ui-expand.png"
+                            width="256"
+                            height="197"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/payyan-ui-simple.png" title="View payyan-ui-simple.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/payyan-ui-simple-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/payyan-ui-simple-256.jpeg" 
+                            alt="Thumbnail of payyan-ui-simple.png"
+                            width="256"
+                            height="197"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/rejected-shortform.png" title="View rejected-shortform.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/rejected-shortform-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/rejected-shortform-256.jpeg" 
+                            alt="Thumbnail of rejected-shortform.png"
+                            width="256"
+                            height="134"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/smc-foundry-font.png" title="View smc-foundry-font.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/smc-foundry-font-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/smc-foundry-font-256.jpeg" 
+                            alt="Thumbnail of smc-foundry-font.png"
+                            width="256"
+                            height="185"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/smc-foundry-homepage.png" title="View smc-foundry-homepage.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/smc-foundry-homepage-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/smc-foundry-homepage-256.jpeg" 
+                            alt="Thumbnail of smc-foundry-homepage.png"
+                            width="256"
+                            height="180"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/smc-foundry-mobile.png" title="View smc-foundry-mobile.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/smc-foundry-mobile-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/smc-foundry-mobile-256.jpeg" 
+                            alt="Thumbnail of smc-foundry-mobile.png"
+                            width="256"
+                            height="568"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2024/smc-foundry-sheet.png" title="View smc-foundry-sheet.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/smc-foundry-sheet-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/smc-foundry-sheet-256.jpeg" 
+                            alt="Thumbnail of smc-foundry-sheet.png"
+                            width="256"
+                            height="166"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article></div>
+    </section><section class="folder" aria-labelledby="folder-2023">
+        <h2 id="folder-2023" class="folder-title">2023</h2>
+        <div class="items grid" role="list"><article class="item" role="listitem">
+                <a href="/images/2023/founder-house-black.png" title="View founder-house-black.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/founder-house-black-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/founder-house-black-256.jpeg" 
+                            alt="Thumbnail of founder-house-black.png"
+                            width="256"
+                            height="256"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/founder-house-brand.png" title="View founder-house-brand.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/founder-house-brand-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/founder-house-brand-256.jpeg" 
+                            alt="Thumbnail of founder-house-brand.png"
+                            width="256"
+                            height="182"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/nassau-brand-2.png" title="View nassau-brand-2.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/nassau-brand-2-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/nassau-brand-2-256.jpeg" 
+                            alt="Thumbnail of nassau-brand-2.png"
+                            width="256"
+                            height="182"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/nassau-brand.png" title="View nassau-brand.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/nassau-brand-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/nassau-brand-256.jpeg" 
+                            alt="Thumbnail of nassau-brand.png"
+                            width="256"
+                            height="182"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/sahya-3-col.png" title="View sahya-3-col.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/sahya-3-col-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/sahya-3-col-256.jpeg" 
+                            alt="Thumbnail of sahya-3-col.png"
+                            width="256"
+                            height="166"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/sahya-idea.png" title="View sahya-idea.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/sahya-idea-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/sahya-idea-256.jpeg" 
+                            alt="Thumbnail of sahya-idea.png"
+                            width="256"
+                            height="166"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/sahya-logo.png" title="View sahya-logo.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/sahya-logo-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/sahya-logo-256.jpeg" 
+                            alt="Thumbnail of sahya-logo.png"
+                            width="256"
+                            height="166"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article><article class="item" role="listitem">
+                <a href="/images/2023/smc-font-page.png" title="View smc-font-page.png" class="item-link">
+                    <picture>
+                        <source 
+                            srcset="/img/thumbnails/smc-font-page-256.webp" 
+                            type="image/webp">
+                        <img 
+                            src="/img/thumbnails/smc-font-page-256.jpeg" 
+                            alt="Thumbnail of smc-font-page.png"
+                            width="256"
+                            height="161"
+                            loading="lazy"
+                            decoding="async">
+                    </picture>
+                </a>
+            </article></div>
+    </section></main>
+<footer>
+    <nav aria-label="Site links">
+        Inspiration: <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a> • 
+        Source: <a href="https://github.com/hfactor/found">Github</a> •
+        Contact: <a href="mailto:hiran.v@gmail.com">Email</a>
+    </nav>
+</footer>
+</body>
+</html>

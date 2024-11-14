@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ description }}">
+    <meta name="theme-color" content="#F7F7F7">
+    <title>{{ title }}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-background: #F7F7F7;
+            --color-brand: #EB5503;
+            --color-text: #141414;
+            --spacing-base: 16px;
+            --spacing-double: 32px;
+            --grid-item-size: 128px;
+            --font-size-base: 12px;
+            --font-size-large: 16px;
+        }
+
+        /* Reset and base styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Silkscreen', sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.2;
+            padding: var(--spacing-double);
+            margin: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-size: var(--font-size-large);
+            font-weight: 700;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        /* Layout Components */
+        .controls {
+            padding: var(--spacing-base);
+            padding-top: 0;
+            margin-bottom: var(--spacing-double);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .controls h1 {
+            margin: 0;
+        }
+
+        .folder {
+            margin-bottom: var(--spacing-double);
+        }
+
+        .folder-title {
+            padding: 0 var(--spacing-base);
+            margin-bottom: var(--spacing-base);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+            gap: var(--spacing-double);
+            padding: 0 var(--spacing-base);
+        }
+
+        .item {
+            aspect-ratio: 1;
+            background-color: #eee;
+            transition: transform 0.2s ease;
+        }
+
+        .item-link {
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+
+        .item-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item-link:focus-visible {
+            outline: 4px solid var(--color-brand);
+            outline-offset: 4px;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--spacing-double) var(--spacing-base);
+            text-align: left;
+        }
+
+        footer a {
+            text-decoration: underline;
+        }
+
+        footer a:hover,
+        footer a:focus-visible {
+            color: var(--color-brand);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-base: 12px;
+                --spacing-double: 24px;
+            }
+
+            body {
+                padding: var(--spacing-base);
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-base);
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-base);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .item {
+                transition: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{ content | safe }}
+</body>
+</html>
