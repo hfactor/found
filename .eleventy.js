@@ -89,6 +89,6 @@ module.exports = function(eleventyConfig) {
       output: "_site",
       includes: "_includes"
     },
-    pathPrefix: "/found/"  // Add this for GitHub Pages
+    pathPrefix: "/"
   };
 };
