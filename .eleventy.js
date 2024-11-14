@@ -4,9 +4,9 @@ const Image = require("@11ty/eleventy-img");
 
 const imageOptions = {
   widths: [256],
-  formats: ["jpeg", "webp"], // Added WebP for better compression
+  formats: ["jpeg", "webp"],
   outputDir: "_site/img/thumbnails",
-  urlPath: "/img/thumbnails",
+  urlPath: "/The-Found/img/thumbnails",  // Updated for GitHub Pages
   filenameFormat: (id, src, width, format) => {
     const extension = path.extname(src);
     const name = path.basename(src, extension);
@@ -31,7 +31,7 @@ async function processImage(src) {
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
-  eleventyConfig.addPassthroughCopy("src/assets"); // For potential future assets
+  eleventyConfig.addPassthroughCopy("src/assets");
 
   eleventyConfig.addGlobalData("imagesByFolder", async () => {
     const imageDir = "src/images";
@@ -60,7 +60,7 @@ module.exports = function(eleventyConfig) {
 
             return {
               name: file,
-              path: `/images/${folder}/${file}`,
+              path: `/The-Found/images/${folder}/${file}`,  // Updated for GitHub Pages
               thumbnail: {
                 webp: imageData.webp.url,
                 jpeg: imageData.jpeg.url,
@@ -73,7 +73,7 @@ module.exports = function(eleventyConfig) {
 
         folders.push({
           name: folder,
-          files: processedFiles.filter(Boolean) // Remove failed processings
+          files: processedFiles.filter(Boolean)
         });
       }
     } catch (error) {
@@ -88,6 +88,7 @@ module.exports = function(eleventyConfig) {
       input: "src",
       output: "_site",
       includes: "_includes"
-    }
+    },
+    pathPrefix: "/found/"  // Add this for GitHub Pages
   };
 };
