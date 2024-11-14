@@ -60,7 +60,7 @@ module.exports = function(eleventyConfig) {
 
             return {
               name: file,
-              path: `/The-Found/images/${folder}/${file}`,  // Updated for GitHub Pages
+              path: `/found/images/${folder}/${file}`,
               thumbnail: {
                 webp: imageData.webp.url,
                 jpeg: imageData.jpeg.url,
