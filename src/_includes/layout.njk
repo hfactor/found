@@ -16,10 +16,11 @@
             --color-background: #F7F7F7;
             --color-brand: #EB5503;
             --color-text: #141414;
-            --spacing-base: 16px;
+            --color-subtext: #949494;
+            --spacing-base: 14px;
             --spacing-double: 32px;
             --grid-item-size: 128px;
-            --font-size-base: 12px;
+            --font-size-base: 14px;
             --font-size-large: 16px;
         }
 
@@ -49,7 +50,7 @@
         /* Typography */
         h1, h2 {
             font-size: var(--font-size-large);
-            font-weight: 700;
+            font-weight: 400;
         }
 
         a {
@@ -92,23 +93,34 @@
         .item {
             aspect-ratio: 1;
             background-color: #eee;
-            transition: transform 0.2s ease;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            position: relative;
         }
 
         .item-link {
-            display: block;
+            display: flex;
             height: 100%;
             position: relative;
+            align-items: center;
+            justify-content: center;
         }
 
         .item-link img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.2s ease;
         }
 
         .item:hover {
-            transform: scale(1.05);
+            border: 1px solid var(--color-brand);
+        }
+
+        .item:hover .item-link img {
+            object-fit: contain;
+            padding: 4px;
+            background-color: #eee;
         }
 
         .item-link:focus-visible {
@@ -120,6 +132,7 @@
         footer {
             padding: var(--spacing-double) var(--spacing-base);
             text-align: left;
+            color: var(--color-subtext);
         }
 
         footer a {
@@ -156,7 +169,7 @@
 
         /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
-            .item {
+            .item, .item-link img {
                 transition: none;
             }
         }
@@ -168,16 +181,17 @@
             }
 
             .item:hover {
-                transform: none;
+                border: none;
+            }
+
+            .item:hover img {
+                object-fit: cover;
+                padding: 0;
             }
         }
     </style>
 </head>
 <body>
     {{ content | safe }}
-
-    <!-- 100% privacy-first analytics -->
-<scriptasyncdefersrc="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-<noscript><imgsrc="https://queue.simpleanalyticscdn.com/noscript.gif"alt=""referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 </html>

@@ -2,10 +2,11 @@
 layout: layout.njk
 title: The Found*
 description: Collection of my design work since 2007, presented without commentary.
+
 ---
 <header class="controls">
     <h1>{{ title }}</h1>
-    {{ description }}
+    <p>{{ description }}</p>
 </header>
 
 <main>
@@ -15,18 +16,13 @@ description: Collection of my design work since 2007, presented without commenta
         <div class="items grid" role="list">{%- for image in folder.files -%}
             <article class="item" role="listitem">
                 <a href="{{ image.path }}" title="View {{ image.name }}" class="item-link">
-                    <picture>
-                        <source 
-                            srcset="{{ image.thumbnail.webp }}" 
-                            type="image/webp">
-                        <img 
-                            src="{{ image.thumbnail.jpeg }}" 
-                            alt="Thumbnail of {{ image.name }}"
-                            width="{{ image.thumbnail.width }}"
-                            height="{{ image.thumbnail.height }}"
-                            loading="lazy"
-                            decoding="async">
-                    </picture>
+                    <img 
+                        src="{{ image.thumbnail }}" 
+                        alt="Thumbnail of {{ image.name }}"
+                        width="256"
+                        height="256"
+                        loading="lazy"
+                        decoding="async">
                 </a>
             </article>
         {%- endfor -%}</div>
@@ -36,8 +32,6 @@ description: Collection of my design work since 2007, presented without commenta
 
 <footer>
     <nav aria-label="Site links">
-        Inspiration: <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a> • 
-        Source: <a href="https://github.com/hfactor/found">Github</a> •
-        Contact: <a href="mailto:hiran.v@gmail.com">Email</a>
+    I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
     </nav>
 </footer>
