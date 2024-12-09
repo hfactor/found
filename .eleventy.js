@@ -3,7 +3,14 @@ const path = require('path');
 const Image = require("@11ty/eleventy-img");
 
 module.exports = function(eleventyConfig) {
+  // Existing image directory passthrough
   eleventyConfig.addPassthroughCopy("src/images");
+  
+  // Add new passthrough copies for modal files
+  eleventyConfig.addPassthroughCopy({
+    "src/js/modal.js": "js/modal.js",
+    "src/css/modal.css": "css/modal.css"
+  });
 
   eleventyConfig.addGlobalData("imagesByFolder", async () => {
     const imageDir = "src/images";
@@ -29,7 +36,7 @@ module.exports = function(eleventyConfig) {
             outputDir: "_site/images/thumbnails",
             urlPath: "/images/thumbnails",
             sharpJpegOptions: {
-              background: 'white'  // Set white background for thumbnails
+              background: 'white'
             }
           });
 
