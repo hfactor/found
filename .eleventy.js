@@ -12,11 +12,11 @@ module.exports = function(eleventyConfig) {
     "src/css/modal.css": "css/modal.css"
   });
 
-  eleventyConfig.addGlobalData("imagesByFolder", async () => {
+  eleventyConfig.addGlobalData("allImagesData", async () => {
     const imageDir = "src/images";
-    const folders = [];
+    const allImages = [];
     
-    if (!fs.existsSync(imageDir)) return folders;
+    if (!fs.existsSync(imageDir)) return { allImages };
     
     const folderEntries = fs.readdirSync(imageDir)
       .filter(item => fs.statSync(path.join(imageDir, item)).isDirectory());
@@ -43,7 +43,8 @@ module.exports = function(eleventyConfig) {
           return {
             name: file,
             path: `/images/${folder}/${file}`,
-            thumbnail: metadata.jpeg[0].url
+            thumbnail: metadata.jpeg[0].url,
+            folder: folder
           };
         } catch (error) {
           console.error(`Error processing ${file}:`, error);
@@ -51,13 +52,10 @@ module.exports = function(eleventyConfig) {
         }
       }));
 
-      folders.push({
-        name: folder,
-        files: processedFiles.filter(Boolean)
-      });
+      allImages.push(...processedFiles.filter(Boolean));
     }
     
-    return folders.sort((a, b) => b.name.localeCompare(a.name));
+    return { allImages };
   });
 
   return {

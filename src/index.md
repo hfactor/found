@@ -10,24 +10,25 @@ description: Collection of my design work since 2007, presented without commenta
 </header>
 
 <main>
-{%- for folder in imagesByFolder -%}
-    <section class="folder" aria-labelledby="folder-{{ folder.name | slug }}">
-        <h2 id="folder-{{ folder.name | slug }}" class="folder-title">{{ folder.name }}</h2>
-        <div class="items grid" role="list">{%- for image in folder.files -%}
-            <article class="item" role="listitem">
-                <a href="{{ image.path }}" title="View {{ image.name }}" class="item-link">
-                    <img 
-                        src="{{ image.thumbnail }}" 
-                        alt="Thumbnail of {{ image.name }}"
-                        width="256"
-                        height="256"
-                        loading="lazy"
-                        decoding="async">
-                </a>
-            </article>
-        {%- endfor -%}</div>
-    </section>
-{%- endfor -%}
+    <div class="items grid" role="list">
+    {%- for image in allImagesData.allImages | shuffle -%}
+        <article class="item" role="listitem">
+            <a href="{{ image.path }}" title="View {{ image.name }}" class="item-link">
+                <img 
+                    src="{{ image.thumbnail }}" 
+                    alt="Thumbnail of {{ image.name }}"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">{{ image.name | replace: "-", " " | replace: "_", " " | replace: ".jpg", "" | replace: ".png", "" | upcase }}</span>
+                    <span class="item-folder">{{ image.folder | upcase }}</span>
+                </div>
+            </a>
+        </article>
+    {%- endfor -%}
+    </div>
 </main>
 
 <footer>
