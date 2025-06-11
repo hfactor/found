@@ -1,11 +1,11 @@
 ---
 layout: layout.njk
-title: The Found*
+title: GRID
 description: Collection of my design work since 2007, presented without commentary.
 
 ---
 <header class="controls">
-    <h1>{{ title }}</h1>
+    <h1 class="title">{{ title }}</h1>
     <div class="description">
         I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
     </div>
@@ -14,8 +14,9 @@ description: Collection of my design work since 2007, presented without commenta
 <main>
     <div class="items grid" role="list">
     {%- for image in collections.allImages -%}
-        <article class="item" role="listitem">
-            <a href="{{ image.path }}" title="View {{ image.name }}" class="item-link">
+        {%- assign remainder = forloop.index | modulo: 5 -%}
+        <article class="item{% if remainder == 0 %} wide{% endif %}" role="listitem">
+            <div class="item-link">
                 <img 
                     src="{{ image.thumbnail }}" 
                     alt="Thumbnail of {{ image.name }}"
@@ -27,7 +28,7 @@ description: Collection of my design work since 2007, presented without commenta
                     <span class="item-title">{{ image.name | replace: "-", " " | replace: "_", " " | replace: ".jpg", "" | replace: ".png", "" | upcase }}</span>
                     <span class="item-folder">{{ image.folder | upcase }}</span>
                 </div>
-            </a>
+            </div>
         </article>
     {%- endfor -%}
     </div>

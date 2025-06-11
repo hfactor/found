@@ -27,6 +27,7 @@ module.exports = function(eleventyConfig) {
 
     console.log("Found folders:", folderEntries);
 
+    // Process all folders first
     for (const folder of folderEntries) {
       const folderPath = path.join(imageDir, folder);
       const files = fs.readdirSync(folderPath)
@@ -64,8 +65,10 @@ module.exports = function(eleventyConfig) {
       allImages.push(...processedFiles.filter(Boolean));
     }
     
-    console.log(`Total images processed: ${allImages.length}`);
-    return allImages;
+    // Shuffle the array before returning
+    const shuffled = [...allImages].sort(() => Math.random() - 0.5);
+    console.log(`Total images processed: ${shuffled.length}`);
+    return shuffled;
   });
 
   return {
