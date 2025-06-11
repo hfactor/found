@@ -12,31 +12,40 @@ module.exports = function(eleventyConfig) {
     "src/css/modal.css": "css/modal.css"
   });
 
-  eleventyConfig.addGlobalData("allImagesData", async () => {
+  // Create a collection for all images
+  eleventyConfig.addCollection("allImages", async function() {
     const imageDir = "src/images";
     const allImages = [];
     
-    if (!fs.existsSync(imageDir)) return { allImages };
+    if (!fs.existsSync(imageDir)) {
+      console.log("Image directory not found:", imageDir);
+      return allImages;
+    }
     
     const folderEntries = fs.readdirSync(imageDir)
       .filter(item => fs.statSync(path.join(imageDir, item)).isDirectory());
+
+    console.log("Found folders:", folderEntries);
 
     for (const folder of folderEntries) {
       const folderPath = path.join(imageDir, folder);
       const files = fs.readdirSync(folderPath)
         .filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
 
+      console.log(`Processing folder ${folder} with ${files.length} files`);
+
       const processedFiles = await Promise.all(files.map(async file => {
         const filePath = path.join(imageDir, folder, file);
 
         try {
           const metadata = await Image(filePath, {
-            widths: [256],
+            widths: [800],
             formats: ["jpeg"],
             outputDir: "_site/images/thumbnails",
             urlPath: "/images/thumbnails",
             sharpJpegOptions: {
-              background: 'white'
+              quality: 85,
+              mozjpeg: true
             }
           });
 
@@ -55,7 +64,8 @@ module.exports = function(eleventyConfig) {
       allImages.push(...processedFiles.filter(Boolean));
     }
     
-    return { allImages };
+    console.log(`Total images processed: ${allImages.length}`);
+    return allImages;
   });
 
   return {

@@ -19,7 +19,6 @@
             --color-subtext: #949494;
             --spacing-base: 14px;
             --spacing-double: 32px;
-            --grid-item-size: 128px;
             --font-size-base: 14px;
             --font-size-large: 16px;
         }
@@ -37,7 +36,6 @@
             font-family: 'Silkscreen', sans-serif;
             font-size: var(--font-size-base);
             line-height: 1.2;
-            padding: var(--spacing-double);
             margin: 0;
         }
 
@@ -56,79 +54,69 @@
         a {
             color: inherit;
             text-decoration: none;
-            transition: color 0.2s ease;
         }
 
         /* Layout Components */
         .controls {
-            padding: var(--spacing-base);
-            padding-top: 0;
-            margin-bottom: var(--spacing-double);
+            padding: var(--spacing-double);
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .controls h1 {
             margin: 0;
         }
 
-        .folder {
-            margin-bottom: var(--spacing-double);
+        .description {
+            max-width: 400px;
+            color: var(--color-subtext);
         }
 
-        .folder-title {
-            padding: 0 var(--spacing-base);
-            margin-bottom: var(--spacing-base);
+        .description a {
+            text-decoration: underline;
+        }
+
+        .description a:hover {
+            color: var(--color-brand);
         }
 
         /* Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: var(--spacing-double);
-            padding: 0 var(--spacing-base);
         }
 
         .item {
-            aspect-ratio: 1;
-            background-color: #eee;
-            transition: all 0.2s ease;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
 
         .item-link {
-            display: flex;
-            height: 100%;
+            display: block;
             position: relative;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
+            height: auto;
         }
 
         .item-link img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.2s ease;
+            height: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .item-info {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 20, 20, 0.8);
-            color: var(--color-background);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            color: var(--color-text);
+            font-size: var(--font-size-base);
+            text-align: right;
             opacity: 0;
             transition: opacity 0.2s ease;
-            padding: var(--spacing-base);
-            text-align: center;
         }
 
         .item:hover .item-info {
@@ -136,38 +124,15 @@
         }
 
         .item-title {
-            font-size: var(--font-size-base);
-            margin-bottom: var(--spacing-base);
+            display: inline;
         }
 
         .item-folder {
-            font-size: calc(var(--font-size-base) * 0.8);
-            color: var(--color-brand);
+            display: inline;
         }
 
-        .item:hover {
-            border: 1px solid var(--color-brand);
-        }
-
-        .item-link:focus-visible {
-            outline: 4px solid var(--color-brand);
-            outline-offset: 4px;
-        }
-
-        /* Footer */
-        footer {
-            padding: var(--spacing-double) var(--spacing-base);
-            text-align: left;
-            color: var(--color-subtext);
-        }
-
-        footer a {
-            text-decoration: underline;
-        }
-
-        footer a:hover,
-        footer a:focus-visible {
-            color: var(--color-brand);
+        .item-folder::before {
+            content: " • ";
         }
 
         /* Mobile Optimizations */
@@ -177,26 +142,13 @@
                 --spacing-double: 24px;
             }
 
-            body {
-                padding: var(--spacing-base);
-            }
-
             .controls {
                 flex-direction: column;
-                align-items: flex-start;
                 gap: var(--spacing-base);
             }
 
             .grid {
-                grid-template-columns: repeat(2, 1fr);
                 gap: var(--spacing-base);
-            }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .item, .item-link img, .item-info {
-                transition: none;
             }
         }
 
@@ -205,27 +157,21 @@
             body {
                 background: none;
             }
-
-            .item:hover {
-                border: none;
-            }
-
-            .item-info {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
     <header class="controls">
     <h1>The Found*</h1>
-    <p>Collection of my design work since 2007, presented without commentary.</p>
+    <div class="description">
+        I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
+    </div>
 </header>
 <main>
     <div class="items grid" role="list"><article class="item" role="listitem">
             <a href="/images/2008/gnu-wallpaper.png" title="View gnu-wallpaper.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/zYsmq_CRov-256.jpeg" 
+                    src="/images/thumbnails/fTffTvUF6d-800.jpeg" 
                     alt="Thumbnail of gnu-wallpaper.png"
                     width="256"
                     height="256"
@@ -239,7 +185,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2008/knowledge-rights-logo.png" title="View knowledge-rights-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/JR4bOgUsWH-256.jpeg" 
+                    src="/images/thumbnails/hmVw7y5_3x-800.jpeg" 
                     alt="Thumbnail of knowledge-rights-logo.png"
                     width="256"
                     height="256"
@@ -253,7 +199,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2008/moving-republic-card.png" title="View moving-republic-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Ehx_7dKkVe-256.jpeg" 
+                    src="/images/thumbnails/pSKE6Mkrx6-800.jpeg" 
                     alt="Thumbnail of moving-republic-card.png"
                     width="256"
                     height="256"
@@ -267,7 +213,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2008/moving-republic-logo.png" title="View moving-republic-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/bEBD8AH3Wc-256.jpeg" 
+                    src="/images/thumbnails/lP_Oi25QbB-800.jpeg" 
                     alt="Thumbnail of moving-republic-logo.png"
                     width="256"
                     height="256"
@@ -281,7 +227,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2008/rufscript-showcase.png" title="View rufscript-showcase.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Mn0wuQLYQ1-256.jpeg" 
+                    src="/images/thumbnails/ccxvYY8dLQ-800.jpeg" 
                     alt="Thumbnail of rufscript-showcase.png"
                     width="256"
                     height="256"
@@ -295,7 +241,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2009/beefup-poster-online.png" title="View beefup-poster-online.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/yT0tmazhjo-256.jpeg" 
+                    src="/images/thumbnails/Ub5TdJwoR3-521.jpeg" 
                     alt="Thumbnail of beefup-poster-online.png"
                     width="256"
                     height="256"
@@ -309,7 +255,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2009/dyuthi-font-showcase.png" title="View dyuthi-font-showcase.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/yBnFRx5TKk-256.jpeg" 
+                    src="/images/thumbnails/kJRX7SrEGY-800.jpeg" 
                     alt="Thumbnail of dyuthi-font-showcase.png"
                     width="256"
                     height="256"
@@ -323,7 +269,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2009/fishpond-logo-cleanup.png" title="View fishpond-logo-cleanup.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/5jm2obcgIK-256.jpeg" 
+                    src="/images/thumbnails/QS9dpJ9Wu2-493.jpeg" 
                     alt="Thumbnail of fishpond-logo-cleanup.png"
                     width="256"
                     height="256"
@@ -337,7 +283,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2009/freesoftware-event-banner.png" title="View freesoftware-event-banner.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Pw99D9y9R3-256.jpeg" 
+                    src="/images/thumbnails/ELcHdNTkFK-800.jpeg" 
                     alt="Thumbnail of freesoftware-event-banner.png"
                     width="256"
                     height="256"
@@ -351,7 +297,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/blue-bream-logo.png" title="View blue-bream-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/fPFxRMmNch-256.jpeg" 
+                    src="/images/thumbnails/_uY4JY8Men-800.jpeg" 
                     alt="Thumbnail of blue-bream-logo.png"
                     width="256"
                     height="256"
@@ -365,7 +311,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/cof-vc.png" title="View cof-vc.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/I73Z233JJT-256.jpeg" 
+                    src="/images/thumbnails/xkRYvNvfMD-800.jpeg" 
                     alt="Thumbnail of cof-vc.png"
                     width="256"
                     height="256"
@@ -379,7 +325,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/cof.png" title="View cof.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vj0ss1J5sN-256.jpeg" 
+                    src="/images/thumbnails/ah72vtlGqb-392.jpeg" 
                     alt="Thumbnail of cof.png"
                     width="256"
                     height="256"
@@ -393,7 +339,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/coftweet.png" title="View coftweet.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/6g8ivhsbQt-145.jpeg" 
+                    src="/images/thumbnails/CvgRSecb8l-145.jpeg" 
                     alt="Thumbnail of coftweet.png"
                     width="256"
                     height="256"
@@ -407,7 +353,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/gnew-logo.png" title="View gnew-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/FDBsmwM4dn-256.jpeg" 
+                    src="/images/thumbnails/0gsD92ALyI-800.jpeg" 
                     alt="Thumbnail of gnew-logo.png"
                     width="256"
                     height="256"
@@ -421,7 +367,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/huge-logo.png" title="View huge-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/oa4Gjo5YRj-256.jpeg" 
+                    src="/images/thumbnails/ZRZpIqF7fA-800.jpeg" 
                     alt="Thumbnail of huge-logo.png"
                     width="256"
                     height="256"
@@ -435,7 +381,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/iv_without.png" title="View iv_without.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/7bg2wiIIyT-256.jpeg" 
+                    src="/images/thumbnails/7lx9gBHR9C-800.jpeg" 
                     alt="Thumbnail of iv_without.png"
                     width="256"
                     height="256"
@@ -449,7 +395,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/ivlast.png" title="View ivlast.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8BRdgxH1F5-256.jpeg" 
+                    src="/images/thumbnails/E1Y1ufZsDE-732.jpeg" 
                     alt="Thumbnail of ivlast.png"
                     width="256"
                     height="256"
@@ -463,7 +409,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/kairos-logo.png" title="View kairos-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Qt46UNcxrA-256.jpeg" 
+                    src="/images/thumbnails/Xor1sSiHP9-782.jpeg" 
                     alt="Thumbnail of kairos-logo.png"
                     width="256"
                     height="256"
@@ -477,7 +423,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/label.jpg" title="View label.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/5ZHVfAYqgm-256.jpeg" 
+                    src="/images/thumbnails/2eLpiwIa3N-800.jpeg" 
                     alt="Thumbnail of label.jpg"
                     width="256"
                     height="256"
@@ -491,7 +437,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/malayalam-news-logo.png" title="View malayalam-news-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Ocva38ugmk-256.jpeg" 
+                    src="/images/thumbnails/6z49nvJ4bL-800.jpeg" 
                     alt="Thumbnail of malayalam-news-logo.png"
                     width="256"
                     height="256"
@@ -505,7 +451,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/rumor-logo-1.png" title="View rumor-logo-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/BPFSCJQmQH-256.jpeg" 
+                    src="/images/thumbnails/t9f4rAxkHm-653.jpeg" 
                     alt="Thumbnail of rumor-logo-1.png"
                     width="256"
                     height="256"
@@ -519,7 +465,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/rumor-logo-2.png" title="View rumor-logo-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/WNRoxpPRgz-256.jpeg" 
+                    src="/images/thumbnails/7RQcktY6EL-413.jpeg" 
                     alt="Thumbnail of rumor-logo-2.png"
                     width="256"
                     height="256"
@@ -533,7 +479,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/samvada-ui-screen.png" title="View samvada-ui-screen.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/N3kUjlZKTK-256.jpeg" 
+                    src="/images/thumbnails/_Mts_eT6pz-800.jpeg" 
                     alt="Thumbnail of samvada-ui-screen.png"
                     width="256"
                     height="256"
@@ -547,7 +493,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/smc-book-1.png" title="View smc-book-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/CRbAggzJvR-256.jpeg" 
+                    src="/images/thumbnails/wmMqVP5-em-800.jpeg" 
                     alt="Thumbnail of smc-book-1.png"
                     width="256"
                     height="256"
@@ -561,7 +507,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/smc-book-3.png" title="View smc-book-3.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/HbvPINqdB--256.jpeg" 
+                    src="/images/thumbnails/E6PDVpX3fU-800.jpeg" 
                     alt="Thumbnail of smc-book-3.png"
                     width="256"
                     height="256"
@@ -575,7 +521,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/smc-book-9.png" title="View smc-book-9.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/aDjSxrTfC6-256.jpeg" 
+                    src="/images/thumbnails/NnxNT5j1y5-708.jpeg" 
                     alt="Thumbnail of smc-book-9.png"
                     width="256"
                     height="256"
@@ -589,7 +535,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/smt-first-logo.png" title="View smt-first-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vNDjNO-ptE-256.jpeg" 
+                    src="/images/thumbnails/WOd03Vi1r2-651.jpeg" 
                     alt="Thumbnail of smt-first-logo.png"
                     width="256"
                     height="256"
@@ -603,7 +549,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/vc.png" title="View vc.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/dvIgxe4Rtj-256.jpeg" 
+                    src="/images/thumbnails/fVtwkSPt0v-800.jpeg" 
                     alt="Thumbnail of vc.png"
                     width="256"
                     height="256"
@@ -617,7 +563,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2010/vibes-media-logos.png" title="View vibes-media-logos.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/kh-k8DZnHM-256.jpeg" 
+                    src="/images/thumbnails/-ySGqfbps5-300.jpeg" 
                     alt="Thumbnail of vibes-media-logos.png"
                     width="256"
                     height="256"
@@ -631,7 +577,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/brandelogowhite.png" title="View brandelogowhite.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/EUArFOFsZN-256.jpeg" 
+                    src="/images/thumbnails/_slkHs2tzD-641.jpeg" 
                     alt="Thumbnail of brandelogowhite.png"
                     width="256"
                     height="256"
@@ -645,7 +591,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/crs-logo-cleanup.png" title="View crs-logo-cleanup.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/2ZsUVOE69P-256.jpeg" 
+                    src="/images/thumbnails/nr88aH4atg-800.jpeg" 
                     alt="Thumbnail of crs-logo-cleanup.png"
                     width="256"
                     height="256"
@@ -659,7 +605,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/exl-logo-melvin.png" title="View exl-logo-melvin.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/42JlJ_17Dw-256.jpeg" 
+                    src="/images/thumbnails/uTJiFBd_zx-800.jpeg" 
                     alt="Thumbnail of exl-logo-melvin.png"
                     width="256"
                     height="256"
@@ -673,7 +619,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/fun-tomato-movie.png" title="View fun-tomato-movie.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8YiQ9YBnzH-256.jpeg" 
+                    src="/images/thumbnails/YPmW48Vwm2-518.jpeg" 
                     alt="Thumbnail of fun-tomato-movie.png"
                     width="256"
                     height="256"
@@ -687,7 +633,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/hiran_vc_smt.png" title="View hiran_vc_smt.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/nTHhlDuz_R-256.jpeg" 
+                    src="/images/thumbnails/SWSy4VssK--800.jpeg" 
                     alt="Thumbnail of hiran_vc_smt.png"
                     width="256"
                     height="256"
@@ -701,7 +647,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/hiran_vc_smt_back.png" title="View hiran_vc_smt_back.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/SEgKS-_FMD-256.jpeg" 
+                    src="/images/thumbnails/ELQhPnM-Nm-800.jpeg" 
                     alt="Thumbnail of hiran_vc_smt_back.png"
                     width="256"
                     height="256"
@@ -715,7 +661,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/iv.png" title="View iv.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/zxnDucCNwT-256.jpeg" 
+                    src="/images/thumbnails/ixJ15c_0kD-800.jpeg" 
                     alt="Thumbnail of iv.png"
                     width="256"
                     height="256"
@@ -729,7 +675,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/mindhelix-logo.png" title="View mindhelix-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/U7TS-zlFft-256.jpeg" 
+                    src="/images/thumbnails/8bxOLX3lqg-800.jpeg" 
                     alt="Thumbnail of mindhelix-logo.png"
                     width="256"
                     height="256"
@@ -743,7 +689,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/moobile-event-identity.png" title="View moobile-event-identity.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vRcTPPmED9-256.jpeg" 
+                    src="/images/thumbnails/1IFN06Yj69-800.jpeg" 
                     alt="Thumbnail of moobile-event-identity.png"
                     width="256"
                     height="256"
@@ -757,7 +703,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/potmax-logos.png" title="View potmax-logos.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/1K9eGyafGg-256.jpeg" 
+                    src="/images/thumbnails/oEdJ_IIr11-800.jpeg" 
                     alt="Thumbnail of potmax-logos.png"
                     width="256"
                     height="256"
@@ -771,7 +717,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/pullman-logo-1.jpg" title="View pullman-logo-1.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/DTcnWL1wSf-256.jpeg" 
+                    src="/images/thumbnails/4sI8ullDSN-800.jpeg" 
                     alt="Thumbnail of pullman-logo-1.jpg"
                     width="256"
                     height="256"
@@ -785,7 +731,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/pullman-logo-2.jpg" title="View pullman-logo-2.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/D-0iFUAeeV-256.jpeg" 
+                    src="/images/thumbnails/OqY77l_1-8-800.jpeg" 
                     alt="Thumbnail of pullman-logo-2.jpg"
                     width="256"
                     height="256"
@@ -799,7 +745,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/pullman-logo-3.png" title="View pullman-logo-3.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/7mDS6yJxqy-256.jpeg" 
+                    src="/images/thumbnails/mpkyrn9aBN-800.jpeg" 
                     alt="Thumbnail of pullman-logo-3.png"
                     width="256"
                     height="256"
@@ -813,7 +759,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2011/think-tank-logos.png" title="View think-tank-logos.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8m_HKElpWU-256.jpeg" 
+                    src="/images/thumbnails/VAELpVE0Kf-800.jpeg" 
                     alt="Thumbnail of think-tank-logos.png"
                     width="256"
                     height="256"
@@ -827,7 +773,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/cliche-productions.png" title="View cliche-productions.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/o5wheCXzH2-256.jpeg" 
+                    src="/images/thumbnails/iOZWNF60Pi-630.jpeg" 
                     alt="Thumbnail of cliche-productions.png"
                     width="256"
                     height="256"
@@ -841,7 +787,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/foodielogo.png" title="View foodielogo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/XPQY1xvQ21-256.jpeg" 
+                    src="/images/thumbnails/xK8kD7RnQT-540.jpeg" 
                     alt="Thumbnail of foodielogo.png"
                     width="256"
                     height="256"
@@ -855,7 +801,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/fpanlogo.png" title="View fpanlogo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/mbV0S1Yp8B-256.jpeg" 
+                    src="/images/thumbnails/VTOMUuhGtF-800.jpeg" 
                     alt="Thumbnail of fpanlogo.png"
                     width="256"
                     height="256"
@@ -869,7 +815,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/genunited-logo.png" title="View genunited-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/z9G4ouH_4H-256.jpeg" 
+                    src="/images/thumbnails/KYv0uud7JQ-800.jpeg" 
                     alt="Thumbnail of genunited-logo.png"
                     width="256"
                     height="256"
@@ -883,7 +829,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/green-website-ui.png" title="View green-website-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/lh-km-TLEe-256.jpeg" 
+                    src="/images/thumbnails/olR75N6b3J-621.jpeg" 
                     alt="Thumbnail of green-website-ui.png"
                     width="256"
                     height="256"
@@ -897,7 +843,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/greenleaf-productions-logos.png" title="View greenleaf-productions-logos.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/4awNu9QuoP-256.jpeg" 
+                    src="/images/thumbnails/DQD6dY3yxg-800.jpeg" 
                     alt="Thumbnail of greenleaf-productions-logos.png"
                     width="256"
                     height="256"
@@ -911,7 +857,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/induspride-ui.png" title="View induspride-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/BosQPg9YZD-256.jpeg" 
+                    src="/images/thumbnails/bzza2XgTXG-800.jpeg" 
                     alt="Thumbnail of induspride-ui.png"
                     width="256"
                     height="256"
@@ -925,7 +871,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/komet-kochi-metro-idea.png" title="View komet-kochi-metro-idea.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/g4bPPztL2A-204.jpeg" 
+                    src="/images/thumbnails/y222yS8HpR-204.jpeg" 
                     alt="Thumbnail of komet-kochi-metro-idea.png"
                     width="256"
                     height="256"
@@ -939,7 +885,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/nm-group-logo.png" title="View nm-group-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/CnXLYhBMAE-256.jpeg" 
+                    src="/images/thumbnails/p_rlv1onvR-800.jpeg" 
                     alt="Thumbnail of nm-group-logo.png"
                     width="256"
                     height="256"
@@ -953,7 +899,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/nm-group.png" title="View nm-group.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/it_9q0gTsM-256.jpeg" 
+                    src="/images/thumbnails/CnEBdP_e9i-800.jpeg" 
                     alt="Thumbnail of nm-group.png"
                     width="256"
                     height="256"
@@ -967,7 +913,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/nm-property-logo.png" title="View nm-property-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/qYuf-BdE0O-256.jpeg" 
+                    src="/images/thumbnails/v1nPPZbvtS-800.jpeg" 
                     alt="Thumbnail of nm-property-logo.png"
                     width="256"
                     height="256"
@@ -981,7 +927,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/print-dialog-1.png" title="View print-dialog-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/j7XykQYhuH-256.jpeg" 
+                    src="/images/thumbnails/wGs66kTaMP-800.jpeg" 
                     alt="Thumbnail of print-dialog-1.png"
                     width="256"
                     height="256"
@@ -995,7 +941,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/print-dialog-2.png" title="View print-dialog-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/TZeIxZSN6i-256.jpeg" 
+                    src="/images/thumbnails/EDVHRTCxqZ-800.jpeg" 
                     alt="Thumbnail of print-dialog-2.png"
                     width="256"
                     height="256"
@@ -1009,7 +955,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/rathri-caligraphy.png" title="View rathri-caligraphy.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Fxu55IrmjN-256.jpeg" 
+                    src="/images/thumbnails/yyG_WKseyV-800.jpeg" 
                     alt="Thumbnail of rathri-caligraphy.png"
                     width="256"
                     height="256"
@@ -1023,7 +969,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/sandkastle.jpg" title="View sandkastle.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/Im7t5js9M_-256.jpeg" 
+                    src="/images/thumbnails/nPAy5D8H8x-800.jpeg" 
                     alt="Thumbnail of sandkastle.jpg"
                     width="256"
                     height="256"
@@ -1037,7 +983,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/smt-logo.png" title="View smt-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/AwqbR5HuJu-256.jpeg" 
+                    src="/images/thumbnails/KIFLryZn0g-800.jpeg" 
                     alt="Thumbnail of smt-logo.png"
                     width="256"
                     height="256"
@@ -1051,7 +997,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/sruthi-manesh.png" title="View sruthi-manesh.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/TONMO-AAys-256.jpeg" 
+                    src="/images/thumbnails/4ws9x5pvm1-800.jpeg" 
                     alt="Thumbnail of sruthi-manesh.png"
                     width="256"
                     height="256"
@@ -1065,7 +1011,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2012/unitac-final-logo.png" title="View unitac-final-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/J_K4_F6U47-256.jpeg" 
+                    src="/images/thumbnails/3mH9_p3gUR-743.jpeg" 
                     alt="Thumbnail of unitac-final-logo.png"
                     width="256"
                     height="256"
@@ -1079,7 +1025,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/Cinephile_Home SignIn.png" title="View Cinephile_Home SignIn.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/IbJDdTRdvD-256.jpeg" 
+                    src="/images/thumbnails/WYPq1AY3JQ-800.jpeg" 
                     alt="Thumbnail of Cinephile_Home SignIn.png"
                     width="256"
                     height="256"
@@ -1093,7 +1039,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/Pumba.png" title="View Pumba.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/-oW6osj3GR-256.jpeg" 
+                    src="/images/thumbnails/McldcdZjv6-800.jpeg" 
                     alt="Thumbnail of Pumba.png"
                     width="256"
                     height="256"
@@ -1107,7 +1053,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/alapatt-card.png" title="View alapatt-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/d7LeiCSTPD-256.jpeg" 
+                    src="/images/thumbnails/7dZy3fSS4N-750.jpeg" 
                     alt="Thumbnail of alapatt-card.png"
                     width="256"
                     height="256"
@@ -1121,7 +1067,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/celebrateyouweb-03.png" title="View celebrateyouweb-03.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/aDV_yOG4P9-256.jpeg" 
+                    src="/images/thumbnails/I8C3mgojpp-800.jpeg" 
                     alt="Thumbnail of celebrateyouweb-03.png"
                     width="256"
                     height="256"
@@ -1135,7 +1081,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/centre-a-bro-1.jpg" title="View centre-a-bro-1.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/bqfOdPre21-256.jpeg" 
+                    src="/images/thumbnails/7UDupDG5hl-800.jpeg" 
                     alt="Thumbnail of centre-a-bro-1.jpg"
                     width="256"
                     height="256"
@@ -1149,7 +1095,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/centre-a-bro-2.jpg" title="View centre-a-bro-2.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/BVbDH5i-4m-256.jpeg" 
+                    src="/images/thumbnails/exUHZ66o9I-800.jpeg" 
                     alt="Thumbnail of centre-a-bro-2.jpg"
                     width="256"
                     height="256"
@@ -1163,7 +1109,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/centre-a-paper.png" title="View centre-a-paper.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/dQMPe8n6xJ-256.jpeg" 
+                    src="/images/thumbnails/jM7Bs3bRdS-779.jpeg" 
                     alt="Thumbnail of centre-a-paper.png"
                     width="256"
                     height="256"
@@ -1177,7 +1123,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/chalo-paris-ui.png" title="View chalo-paris-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/NMzMxbPVe4-256.jpeg" 
+                    src="/images/thumbnails/lC80wD7cZE-667.jpeg" 
                     alt="Thumbnail of chalo-paris-ui.png"
                     width="256"
                     height="256"
@@ -1191,7 +1137,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/chomchom-web-UI.png" title="View chomchom-web-UI.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/1JCyFu4UU2-256.jpeg" 
+                    src="/images/thumbnails/J4-k_Qn_4I-800.jpeg" 
                     alt="Thumbnail of chomchom-web-UI.png"
                     width="256"
                     height="256"
@@ -1205,7 +1151,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/deepthi-sarath-card.png" title="View deepthi-sarath-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/7yG-m2eubX-256.jpeg" 
+                    src="/images/thumbnails/xI9Fphu-9J-800.jpeg" 
                     alt="Thumbnail of deepthi-sarath-card.png"
                     width="256"
                     height="256"
@@ -1219,7 +1165,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/duo-ui.png" title="View duo-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/kdP2YPSq1R-256.jpeg" 
+                    src="/images/thumbnails/YkaL3UvoTH-800.jpeg" 
                     alt="Thumbnail of duo-ui.png"
                     width="256"
                     height="256"
@@ -1233,7 +1179,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/fortis-dashboard.png" title="View fortis-dashboard.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/QJ99g4SKWP-256.jpeg" 
+                    src="/images/thumbnails/E1aL9NbuXq-800.jpeg" 
                     alt="Thumbnail of fortis-dashboard.png"
                     width="256"
                     height="256"
@@ -1247,7 +1193,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/fortis-microsite.png" title="View fortis-microsite.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/OFfE0GQ4aH-256.jpeg" 
+                    src="/images/thumbnails/HKcM1UF2No-800.jpeg" 
                     alt="Thumbnail of fortis-microsite.png"
                     width="256"
                     height="256"
@@ -1261,7 +1207,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/harthall-cal.png" title="View harthall-cal.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/gcaKx11OHm-256.jpeg" 
+                    src="/images/thumbnails/vz3s4_R2y1-800.jpeg" 
                     alt="Thumbnail of harthall-cal.png"
                     width="256"
                     height="256"
@@ -1275,7 +1221,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/harthall-cal_detailed.png" title="View harthall-cal_detailed.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/rhnm-fhwXB-256.jpeg" 
+                    src="/images/thumbnails/RUnToGz9uA-800.jpeg" 
                     alt="Thumbnail of harthall-cal_detailed.png"
                     width="256"
                     height="256"
@@ -1289,7 +1235,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/indic-keyboard-v2.png" title="View indic-keyboard-v2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/_06bdngCeA-256.jpeg" 
+                    src="/images/thumbnails/x8OLg99e63-800.jpeg" 
                     alt="Thumbnail of indic-keyboard-v2.png"
                     width="256"
                     height="256"
@@ -1303,7 +1249,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/kolappulliappan-bike-sticker.png" title="View kolappulliappan-bike-sticker.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/6_SmFK_cZX-256.jpeg" 
+                    src="/images/thumbnails/FBsELUI2R0-800.jpeg" 
                     alt="Thumbnail of kolappulliappan-bike-sticker.png"
                     width="256"
                     height="256"
@@ -1317,7 +1263,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/liberty-videocon-ui.png" title="View liberty-videocon-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/TNsuhV2b3q-256.jpeg" 
+                    src="/images/thumbnails/tUXNOxH4XF-800.jpeg" 
                     alt="Thumbnail of liberty-videocon-ui.png"
                     width="256"
                     height="256"
@@ -1331,7 +1277,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/mindover-logo.png" title="View mindover-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/smXTgND0qH-256.jpeg" 
+                    src="/images/thumbnails/3BGxaD_wVW-380.jpeg" 
                     alt="Thumbnail of mindover-logo.png"
                     width="256"
                     height="256"
@@ -1345,7 +1291,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/pamper-app-logo.png" title="View pamper-app-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/-KqD2Wd8m4-256.jpeg" 
+                    src="/images/thumbnails/aHgAAzbPT7-800.jpeg" 
                     alt="Thumbnail of pamper-app-logo.png"
                     width="256"
                     height="256"
@@ -1359,7 +1305,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/pamper-ui.png" title="View pamper-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/9ci8hnn0gf-256.jpeg" 
+                    src="/images/thumbnails/qu1poeqpVf-800.jpeg" 
                     alt="Thumbnail of pamper-ui.png"
                     width="256"
                     height="256"
@@ -1373,7 +1319,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/rejected-logos.png" title="View rejected-logos.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/A7ABJMdNVF-256.jpeg" 
+                    src="/images/thumbnails/j7Drl-AORK-800.jpeg" 
                     alt="Thumbnail of rejected-logos.png"
                     width="256"
                     height="256"
@@ -1387,7 +1333,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/santosh-card-2.png" title="View santosh-card-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/dI81lAnoMr-256.jpeg" 
+                    src="/images/thumbnails/6O8vM6YZMQ-800.jpeg" 
                     alt="Thumbnail of santosh-card-2.png"
                     width="256"
                     height="256"
@@ -1401,7 +1347,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/santosh-card.png" title="View santosh-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/mhjRPviP_o-256.jpeg" 
+                    src="/images/thumbnails/hiGOXmFcmH-600.jpeg" 
                     alt="Thumbnail of santosh-card.png"
                     width="256"
                     height="256"
@@ -1415,7 +1361,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/smc-tee-black.png" title="View smc-tee-black.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/uHMesNd9i6-256.jpeg" 
+                    src="/images/thumbnails/kk7FgZSGQi-800.jpeg" 
                     alt="Thumbnail of smc-tee-black.png"
                     width="256"
                     height="256"
@@ -1429,7 +1375,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/smt-id-card.png" title="View smt-id-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/bExnbSyeIv-256.jpeg" 
+                    src="/images/thumbnails/tYeTA0jIQa-434.jpeg" 
                     alt="Thumbnail of smt-id-card.png"
                     width="256"
                     height="256"
@@ -1443,7 +1389,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2013/spara-character.png" title="View spara-character.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/WnfCa-vZR7-256.jpeg" 
+                    src="/images/thumbnails/ayFVAOCpvk-800.jpeg" 
                     alt="Thumbnail of spara-character.png"
                     width="256"
                     height="256"
@@ -1457,7 +1403,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Coral-Bay-Theme-With-Title.png" title="View Coral-Bay-Theme-With-Title.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/jePPM-ywPG-256.jpeg" 
+                    src="/images/thumbnails/EPCtIavGQh-800.jpeg" 
                     alt="Thumbnail of Coral-Bay-Theme-With-Title.png"
                     width="256"
                     height="256"
@@ -1471,7 +1417,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Design-2-HomePage.jpg" title="View Design-2-HomePage.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/pVJqSRAwUD-256.jpeg" 
+                    src="/images/thumbnails/LCqGvs-jVX-800.jpeg" 
                     alt="Thumbnail of Design-2-HomePage.jpg"
                     width="256"
                     height="256"
@@ -1485,7 +1431,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/EHQ-Admin_Theme_Modal_4_Banner&More.png" title="View EHQ-Admin_Theme_Modal_4_Banner&More.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/LZMVyuYTMN-256.jpeg" 
+                    src="/images/thumbnails/NB_mxc6ddG-800.jpeg" 
                     alt="Thumbnail of EHQ-Admin_Theme_Modal_4_Banner&More.png"
                     width="256"
                     height="256"
@@ -1499,7 +1445,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/LGBTee_Red_Reference.png" title="View LGBTee_Red_Reference.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/fXAn7Rnsyr-256.jpeg" 
+                    src="/images/thumbnails/a4k5kV8ACh-784.jpeg" 
                     alt="Thumbnail of LGBTee_Red_Reference.png"
                     width="256"
                     height="256"
@@ -1513,7 +1459,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/LGBTee_White_Front.png" title="View LGBTee_White_Front.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/4pk1tNWRAb-256.jpeg" 
+                    src="/images/thumbnails/uxDbSAqu79-800.jpeg" 
                     alt="Thumbnail of LGBTee_White_Front.png"
                     width="256"
                     height="256"
@@ -1527,7 +1473,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Reporting-UI-6.jpg" title="View Reporting-UI-6.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/8sn_qPT7QH-256.jpeg" 
+                    src="/images/thumbnails/W__N6yD_rq-800.jpeg" 
                     alt="Thumbnail of Reporting-UI-6.jpg"
                     width="256"
                     height="256"
@@ -1541,7 +1487,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Simba.png" title="View Simba.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/6FN1g5bxED-256.jpeg" 
+                    src="/images/thumbnails/TY5QNgWnQS-800.jpeg" 
                     alt="Thumbnail of Simba.png"
                     width="256"
                     height="256"
@@ -1555,7 +1501,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/ThemePageAdmin-01.png" title="View ThemePageAdmin-01.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/kyZCdJkK-0-256.jpeg" 
+                    src="/images/thumbnails/3OnjjIFrwG-800.jpeg" 
                     alt="Thumbnail of ThemePageAdmin-01.png"
                     width="256"
                     height="256"
@@ -1569,7 +1515,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Timon.png" title="View Timon.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/QceWEr7ouT-256.jpeg" 
+                    src="/images/thumbnails/YPbtNMrQ55-800.jpeg" 
                     alt="Thumbnail of Timon.png"
                     width="256"
                     height="256"
@@ -1583,7 +1529,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Torquay.png" title="View Torquay.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/CCF_2YzZOU-256.jpeg" 
+                    src="/images/thumbnails/Szbo8xwNKv-800.jpeg" 
                     alt="Thumbnail of Torquay.png"
                     width="256"
                     height="256"
@@ -1597,7 +1543,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/Zazu.png" title="View Zazu.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/goEhCAWJ8_-256.jpeg" 
+                    src="/images/thumbnails/9L7O4yMeRT-800.jpeg" 
                     alt="Thumbnail of Zazu.png"
                     width="256"
                     height="256"
@@ -1611,7 +1557,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/against-ignorance-logo-small.png" title="View against-ignorance-logo-small.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/XlI-OapSK2-220.jpeg" 
+                    src="/images/thumbnails/RjpUp7Laz--220.jpeg" 
                     alt="Thumbnail of against-ignorance-logo-small.png"
                     width="256"
                     height="256"
@@ -1625,7 +1571,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/against-ignorance-logo.png" title="View against-ignorance-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/OaYe5MN40F-256.jpeg" 
+                    src="/images/thumbnails/1oXbjXBdDn-760.jpeg" 
                     alt="Thumbnail of against-ignorance-logo.png"
                     width="256"
                     height="256"
@@ -1639,7 +1585,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/center_a_logo.png" title="View center_a_logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/KwUdMHPB5v-256.jpeg" 
+                    src="/images/thumbnails/F50yecKaMA-568.jpeg" 
                     alt="Thumbnail of center_a_logo.png"
                     width="256"
                     height="256"
@@ -1653,7 +1599,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/fuel-badges.png" title="View fuel-badges.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/-dDt0j7Pyg-256.jpeg" 
+                    src="/images/thumbnails/xs1q9K_KMw-800.jpeg" 
                     alt="Thumbnail of fuel-badges.png"
                     width="256"
                     height="256"
@@ -1667,7 +1613,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/indic-keyboard.png" title="View indic-keyboard.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/gcc8fQR8MW-256.jpeg" 
+                    src="/images/thumbnails/ImNwZ9gcRB-800.jpeg" 
                     alt="Thumbnail of indic-keyboard.png"
                     width="256"
                     height="256"
@@ -1681,7 +1627,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/indiclogo-01.png" title="View indiclogo-01.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/l2K7rUuPla-256.jpeg" 
+                    src="/images/thumbnails/trJh0u7ojk-800.jpeg" 
                     alt="Thumbnail of indiclogo-01.png"
                     width="256"
                     height="256"
@@ -1695,7 +1641,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/izha-logo.png" title="View izha-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/s4c1XSui9x-256.jpeg" 
+                    src="/images/thumbnails/F8OogXNHSQ-800.jpeg" 
                     alt="Thumbnail of izha-logo.png"
                     width="256"
                     height="256"
@@ -1709,7 +1655,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/jinesh-book-cover.png" title="View jinesh-book-cover.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/_81fabRQP2-256.jpeg" 
+                    src="/images/thumbnails/cMmdMxbJg3-800.jpeg" 
                     alt="Thumbnail of jinesh-book-cover.png"
                     width="256"
                     height="256"
@@ -1723,7 +1669,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/mathai-logo.jpg" title="View mathai-logo.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/oLugKqSTTJ-256.jpeg" 
+                    src="/images/thumbnails/BgBEXQw98q-800.jpeg" 
                     alt="Thumbnail of mathai-logo.jpg"
                     width="256"
                     height="256"
@@ -1737,7 +1683,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/mayalogo-02.png" title="View mayalogo-02.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/_MEk-iVQTK-256.jpeg" 
+                    src="/images/thumbnails/iNomRy2-1f-800.jpeg" 
                     alt="Thumbnail of mayalogo-02.png"
                     width="256"
                     height="256"
@@ -1751,7 +1697,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/metermathai-ui.png" title="View metermathai-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/fwl54qhYS8-256.jpeg" 
+                    src="/images/thumbnails/3rhZ45M8zZ-800.jpeg" 
                     alt="Thumbnail of metermathai-ui.png"
                     width="256"
                     height="256"
@@ -1765,7 +1711,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/mozilla-badges-02.png" title="View mozilla-badges-02.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ZwgpdJf90--256.jpeg" 
+                    src="/images/thumbnails/Zz37kyneyx-800.jpeg" 
                     alt="Thumbnail of mozilla-badges-02.png"
                     width="256"
                     height="256"
@@ -1779,7 +1725,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/mozilla-badges-03.png" title="View mozilla-badges-03.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8_XYFDmU5k-256.jpeg" 
+                    src="/images/thumbnails/FNHWTPPXwV-800.jpeg" 
                     alt="Thumbnail of mozilla-badges-03.png"
                     width="256"
                     height="256"
@@ -1793,7 +1739,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/oricards-01.png" title="View oricards-01.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/mtZ-Rk8LAf-256.jpeg" 
+                    src="/images/thumbnails/jr_2GJiL9S-600.jpeg" 
                     alt="Thumbnail of oricards-01.png"
                     width="256"
                     height="256"
@@ -1807,7 +1753,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/promographics.png" title="View promographics.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ij7JM4kPjC-180.jpeg" 
+                    src="/images/thumbnails/860R-hyqyC-180.jpeg" 
                     alt="Thumbnail of promographics.png"
                     width="256"
                     height="256"
@@ -1821,7 +1767,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/received_m_id_220031634872028_0.jpeg" title="View received_m_id_220031634872028_0.jpeg" class="item-link">
                 <img 
-                    src="/images/thumbnails/g5S-Jr9xpX-256.jpeg" 
+                    src="/images/thumbnails/lQoxCcQcuH-678.jpeg" 
                     alt="Thumbnail of received_m_id_220031634872028_0.jpeg"
                     width="256"
                     height="256"
@@ -1835,7 +1781,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/side-talk-branding.png" title="View side-talk-branding.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8T43leYYTo-256.jpeg" 
+                    src="/images/thumbnails/9o5_e5Qy2K-800.jpeg" 
                     alt="Thumbnail of side-talk-branding.png"
                     width="256"
                     height="256"
@@ -1849,7 +1795,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/smc-links-banner.jpg" title="View smc-links-banner.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/xQEQ9LO6IN-256.jpeg" 
+                    src="/images/thumbnails/rDEbqsjrVO-800.jpeg" 
                     alt="Thumbnail of smc-links-banner.jpg"
                     width="256"
                     height="256"
@@ -1863,7 +1809,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/smc_font_workshop_poster_long.png" title="View smc_font_workshop_poster_long.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/rlwnBgrUEb-256.jpeg" 
+                    src="/images/thumbnails/a8E8sSqVQ6-800.jpeg" 
                     alt="Thumbnail of smc_font_workshop_poster_long.png"
                     width="256"
                     height="256"
@@ -1877,7 +1823,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/smt-links-invite.jpg" title="View smt-links-invite.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/sm3Gr882yT-256.jpeg" 
+                    src="/images/thumbnails/DQKgnC4q_Q-620.jpeg" 
                     alt="Thumbnail of smt-links-invite.jpg"
                     width="256"
                     height="256"
@@ -1891,7 +1837,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/sneha-ring-design-one.png" title="View sneha-ring-design-one.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/YWdhOT6SlX-256.jpeg" 
+                    src="/images/thumbnails/9yWmgrnSI_-800.jpeg" 
                     alt="Thumbnail of sneha-ring-design-one.png"
                     width="256"
                     height="256"
@@ -1905,7 +1851,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/visitingcard_smc-01.png" title="View visitingcard_smc-01.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/sPkGr1OedU-256.jpeg" 
+                    src="/images/thumbnails/VM-ZMPMWe4-800.jpeg" 
                     alt="Thumbnail of visitingcard_smc-01.png"
                     width="256"
                     height="256"
@@ -1919,7 +1865,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2014/widgets-videos-gallery-view.jpg" title="View widgets-videos-gallery-view.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/bFhPLiYgt6-256.jpeg" 
+                    src="/images/thumbnails/eyqZuVm8s9-800.jpeg" 
                     alt="Thumbnail of widgets-videos-gallery-view.jpg"
                     width="256"
                     height="256"
@@ -1933,7 +1879,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/FacebookCover-SaveInternet.png" title="View FacebookCover-SaveInternet.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/dDvXwcX-jQ-256.jpeg" 
+                    src="/images/thumbnails/27WQ2mjPYn-800.jpeg" 
                     alt="Thumbnail of FacebookCover-SaveInternet.png"
                     width="256"
                     height="256"
@@ -1947,7 +1893,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/Lakshmi-Card.png" title="View Lakshmi-Card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Ap0Lh3-LDF-256.jpeg" 
+                    src="/images/thumbnails/DovDjTJIB8-531.jpeg" 
                     alt="Thumbnail of Lakshmi-Card.png"
                     width="256"
                     height="256"
@@ -1961,7 +1907,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/all-stamps.png" title="View all-stamps.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/a_SctvzM_8-256.jpeg" 
+                    src="/images/thumbnails/qbFdhMXLqv-800.jpeg" 
                     alt="Thumbnail of all-stamps.png"
                     width="256"
                     height="256"
@@ -1975,7 +1921,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/attrito-blue-whitebg.png" title="View attrito-blue-whitebg.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/QBUsMLPeQ3-256.jpeg" 
+                    src="/images/thumbnails/mC1WsMIt57-800.jpeg" 
                     alt="Thumbnail of attrito-blue-whitebg.png"
                     width="256"
                     height="256"
@@ -1989,7 +1935,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/namma-khasak-image.png" title="View namma-khasak-image.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8zxNtmNlDb-256.jpeg" 
+                    src="/images/thumbnails/yNgL5flXHZ-800.jpeg" 
                     alt="Thumbnail of namma-khasak-image.png"
                     width="256"
                     height="256"
@@ -2003,7 +1949,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/namma-khasak.png" title="View namma-khasak.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/1RHQ86dg9W-256.jpeg" 
+                    src="/images/thumbnails/2yMH8mVFVP-800.jpeg" 
                     alt="Thumbnail of namma-khasak.png"
                     width="256"
                     height="256"
@@ -2017,7 +1963,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2015/priyadarshanweb_iidea.png" title="View priyadarshanweb_iidea.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/sli-ltkXFk-256.jpeg" 
+                    src="/images/thumbnails/2N87hDbV48-800.jpeg" 
                     alt="Thumbnail of priyadarshanweb_iidea.png"
                     width="256"
                     height="256"
@@ -2031,7 +1977,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2016/Appu-Card-Final-Mobile.png" title="View Appu-Card-Final-Mobile.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/mP0rpyUoze-256.jpeg" 
+                    src="/images/thumbnails/MQp55RmjFM-565.jpeg" 
                     alt="Thumbnail of Appu-Card-Final-Mobile.png"
                     width="256"
                     height="256"
@@ -2045,7 +1991,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2016/chali-machine-ui.png" title="View chali-machine-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/r-vh5o_71R-256.jpeg" 
+                    src="/images/thumbnails/PVqzLOzvEL-800.jpeg" 
                     alt="Thumbnail of chali-machine-ui.png"
                     width="256"
                     height="256"
@@ -2059,7 +2005,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2016/chalimachine-logo.png" title="View chalimachine-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/fy45nUAmAp-256.jpeg" 
+                    src="/images/thumbnails/AGR2ohHbQG-800.jpeg" 
                     alt="Thumbnail of chalimachine-logo.png"
                     width="256"
                     height="256"
@@ -2073,7 +2019,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2016/muraligopi-story-title-.jpg" title="View muraligopi-story-title-.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/_LfYDOKjOe-256.jpeg" 
+                    src="/images/thumbnails/j-we5OA8hD-800.jpeg" 
                     alt="Thumbnail of muraligopi-story-title-.jpg"
                     width="256"
                     height="256"
@@ -2087,7 +2033,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2016/varnam-logo-mobile.png" title="View varnam-logo-mobile.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Sjy5SK2SEi-256.jpeg" 
+                    src="/images/thumbnails/3thj_W3VNZ-512.jpeg" 
                     alt="Thumbnail of varnam-logo-mobile.png"
                     width="256"
                     height="256"
@@ -2101,7 +2047,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/Book-Cover-Small.png" title="View Book-Cover-Small.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/7Uonh8vUuC-256.jpeg" 
+                    src="/images/thumbnails/-iN_p1161--540.jpeg" 
                     alt="Thumbnail of Book-Cover-Small.png"
                     width="256"
                     height="256"
@@ -2115,7 +2061,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/SL-English-Homepage.png" title="View SL-English-Homepage.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ul7bS588cs-256.jpeg" 
+                    src="/images/thumbnails/1PgzOhL3wd-800.jpeg" 
                     alt="Thumbnail of SL-English-Homepage.png"
                     width="256"
                     height="256"
@@ -2129,7 +2075,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/WMW-Home-Page.png" title="View WMW-Home-Page.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/_D29F_YPDn-256.jpeg" 
+                    src="/images/thumbnails/j1OeRJye5W-800.jpeg" 
                     alt="Thumbnail of WMW-Home-Page.png"
                     width="256"
                     height="256"
@@ -2143,7 +2089,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/anish-drupal-card.jpg" title="View anish-drupal-card.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/ly4chC7ikS-256.jpeg" 
+                    src="/images/thumbnails/0WVg3PwqXr-276.jpeg" 
                     alt="Thumbnail of anish-drupal-card.jpg"
                     width="256"
                     height="256"
@@ -2157,7 +2103,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/book-cover-one-front.png" title="View book-cover-one-front.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vHgBio92vc-256.jpeg" 
+                    src="/images/thumbnails/h_CdukPKKu-800.jpeg" 
                     alt="Thumbnail of book-cover-one-front.png"
                     width="256"
                     height="256"
@@ -2171,7 +2117,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/book-cover-two-front.png" title="View book-cover-two-front.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ESuKlyqvo6-256.jpeg" 
+                    src="/images/thumbnails/FLQY5AyERN-800.jpeg" 
                     alt="Thumbnail of book-cover-two-front.png"
                     width="256"
                     height="256"
@@ -2185,7 +2131,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/buy-horec-logo.png" title="View buy-horec-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/yMPUcb-fgb-256.jpeg" 
+                    src="/images/thumbnails/V6QPNP7RZJ-800.jpeg" 
                     alt="Thumbnail of buy-horec-logo.png"
                     width="256"
                     height="256"
@@ -2199,7 +2145,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/cycle-group-quintype.png" title="View cycle-group-quintype.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/4c44I8C496-256.jpeg" 
+                    src="/images/thumbnails/L6tT4Aa-Pz-800.jpeg" 
                     alt="Thumbnail of cycle-group-quintype.png"
                     width="256"
                     height="256"
@@ -2213,7 +2159,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/final-card-mobile.png" title="View final-card-mobile.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/S0NR3W46JD-256.jpeg" 
+                    src="/images/thumbnails/ho2Q83AVQI-750.jpeg" 
                     alt="Thumbnail of final-card-mobile.png"
                     width="256"
                     height="256"
@@ -2227,7 +2173,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/horeca-sample.png" title="View horeca-sample.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/rB9wNsChuM-256.jpeg" 
+                    src="/images/thumbnails/Q946sSOqEU-800.jpeg" 
                     alt="Thumbnail of horeca-sample.png"
                     width="256"
                     height="256"
@@ -2241,7 +2187,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/logo-padashekharam.png" title="View logo-padashekharam.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/celz2aBHqk-256.jpeg" 
+                    src="/images/thumbnails/hMV8JSHVqW-800.jpeg" 
                     alt="Thumbnail of logo-padashekharam.png"
                     width="256"
                     height="256"
@@ -2255,7 +2201,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/manikandavijayam-event.jpg" title="View manikandavijayam-event.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/uKwbKkKfkG-256.jpeg" 
+                    src="/images/thumbnails/XF0PgGd9d5-706.jpeg" 
                     alt="Thumbnail of manikandavijayam-event.jpg"
                     width="256"
                     height="256"
@@ -2269,7 +2215,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/nanma-logo.png" title="View nanma-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/CaarCKqUef-256.jpeg" 
+                    src="/images/thumbnails/P30Ewjeqes-792.jpeg" 
                     alt="Thumbnail of nanma-logo.png"
                     width="256"
                     height="256"
@@ -2283,7 +2229,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/next-election-logo.png" title="View next-election-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/5JfLUKhf9e-256.jpeg" 
+                    src="/images/thumbnails/mQd96xuK7B-799.jpeg" 
                     alt="Thumbnail of next-election-logo.png"
                     width="256"
                     height="256"
@@ -2297,7 +2243,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/rejected-logo-2.png" title="View rejected-logo-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/SCl4K46fdy-256.jpeg" 
+                    src="/images/thumbnails/lqGDwBx3Yy-800.jpeg" 
                     alt="Thumbnail of rejected-logo-2.png"
                     width="256"
                     height="256"
@@ -2311,7 +2257,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/rejected-logo.png" title="View rejected-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/yoCZi-ggXA-256.jpeg" 
+                    src="/images/thumbnails/SvlWSSELup-800.jpeg" 
                     alt="Thumbnail of rejected-logo.png"
                     width="256"
                     height="256"
@@ -2325,7 +2271,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/shiili-wedding-got.png" title="View shiili-wedding-got.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/gaVSXm6ahh-256.jpeg" 
+                    src="/images/thumbnails/8lva7GV2Zz-360.jpeg" 
                     alt="Thumbnail of shiili-wedding-got.png"
                     width="256"
                     height="256"
@@ -2339,7 +2285,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/swathicard-print-cover.png" title="View swathicard-print-cover.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/cimMO5o-4P-256.jpeg" 
+                    src="/images/thumbnails/kSTd3I5Edf-800.jpeg" 
                     alt="Thumbnail of swathicard-print-cover.png"
                     width="256"
                     height="256"
@@ -2353,7 +2299,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/swathicard-print-line.png" title="View swathicard-print-line.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/TIY5J4AONe-256.jpeg" 
+                    src="/images/thumbnails/UqowlVvmKC-800.jpeg" 
                     alt="Thumbnail of swathicard-print-line.png"
                     width="256"
                     height="256"
@@ -2367,7 +2313,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/we-the-womeni-ui-2.png" title="View we-the-womeni-ui-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/sfZWaceMkC-256.jpeg" 
+                    src="/images/thumbnails/gvSvtNFK7u-800.jpeg" 
                     alt="Thumbnail of we-the-womeni-ui-2.png"
                     width="256"
                     height="256"
@@ -2381,7 +2327,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/we-the-womeni-ui.png" title="View we-the-womeni-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/iCuueHI2Fh-256.jpeg" 
+                    src="/images/thumbnails/TOdCw4OK1D-800.jpeg" 
                     alt="Thumbnail of we-the-womeni-ui.png"
                     width="256"
                     height="256"
@@ -2395,7 +2341,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2017/wedding-amit-card.jpg" title="View wedding-amit-card.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/kVsjrY54YL-256.jpeg" 
+                    src="/images/thumbnails/3vSyqAUCOI-768.jpeg" 
                     alt="Thumbnail of wedding-amit-card.jpg"
                     width="256"
                     height="256"
@@ -2409,7 +2355,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/5. Logo with BG.png" title="View 5. Logo with BG.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/DdeZ-FC1SE-256.jpeg" 
+                    src="/images/thumbnails/nNVQCUJBtm-800.jpeg" 
                     alt="Thumbnail of 5. Logo with BG.png"
                     width="256"
                     height="256"
@@ -2423,7 +2369,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/7. Mockup.png" title="View 7. Mockup.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Midl9EA4h2-256.jpeg" 
+                    src="/images/thumbnails/6q93xumcMA-800.jpeg" 
                     alt="Thumbnail of 7. Mockup.png"
                     width="256"
                     height="256"
@@ -2437,7 +2383,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/arya-kadhakalil-invite.png" title="View arya-kadhakalil-invite.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/VLuIlDl9hd-256.jpeg" 
+                    src="/images/thumbnails/fIujQSrMXR-800.jpeg" 
                     alt="Thumbnail of arya-kadhakalil-invite.png"
                     width="256"
                     height="256"
@@ -2451,7 +2397,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/caligraphy-title.png" title="View caligraphy-title.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/DooAr3129n-256.jpeg" 
+                    src="/images/thumbnails/fNJp9D3eLM-800.jpeg" 
                     alt="Thumbnail of caligraphy-title.png"
                     width="256"
                     height="256"
@@ -2465,7 +2411,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/pathimuraja-book-cover-title.png" title="View pathimuraja-book-cover-title.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/qEd8gcVnLs-256.jpeg" 
+                    src="/images/thumbnails/YGgdwabyQf-800.jpeg" 
                     alt="Thumbnail of pathimuraja-book-cover-title.png"
                     width="256"
                     height="256"
@@ -2479,7 +2425,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/santosh-award.jpg" title="View santosh-award.jpg" class="item-link">
                 <img 
-                    src="/images/thumbnails/wzy3zJ6TwK-256.jpeg" 
+                    src="/images/thumbnails/-xvILRZhev-800.jpeg" 
                     alt="Thumbnail of santosh-award.jpg"
                     width="256"
                     height="256"
@@ -2493,7 +2439,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/soappiness-coconut.png" title="View soappiness-coconut.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/qu4nZAYLyi-256.jpeg" 
+                    src="/images/thumbnails/5LuH4aReoE-800.jpeg" 
                     alt="Thumbnail of soappiness-coconut.png"
                     width="256"
                     height="256"
@@ -2507,7 +2453,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/soappiness-lemongrass.png" title="View soappiness-lemongrass.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/QN0bZQyrby-256.jpeg" 
+                    src="/images/thumbnails/Bc-b1mI71Q-800.jpeg" 
                     alt="Thumbnail of soappiness-lemongrass.png"
                     width="256"
                     height="256"
@@ -2521,7 +2467,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2018/suvarna-news-ui.png" title="View suvarna-news-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ZM5Ts4sVfV-256.jpeg" 
+                    src="/images/thumbnails/e3TSSx_UYk-800.jpeg" 
                     alt="Thumbnail of suvarna-news-ui.png"
                     width="256"
                     height="256"
@@ -2535,7 +2481,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/Sample1.png" title="View Sample1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/NFHufOrQJ6-256.jpeg" 
+                    src="/images/thumbnails/K6bhq_uAmE-800.jpeg" 
                     alt="Thumbnail of Sample1.png"
                     width="256"
                     height="256"
@@ -2549,7 +2495,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/front-direct.png" title="View front-direct.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/sod9cMsjMf-256.jpeg" 
+                    src="/images/thumbnails/deSQRzm6ZJ-800.jpeg" 
                     alt="Thumbnail of front-direct.png"
                     width="256"
                     height="256"
@@ -2563,7 +2509,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/front-postal.png" title="View front-postal.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/qWTtoB2xqf-256.jpeg" 
+                    src="/images/thumbnails/1HOFLewJmE-800.jpeg" 
                     alt="Thumbnail of front-postal.png"
                     width="256"
                     height="256"
@@ -2577,7 +2523,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/lubaba-asim-invite-card.png" title="View lubaba-asim-invite-card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/nqtPRLmEU0-256.jpeg" 
+                    src="/images/thumbnails/9vQ1AmNey5-800.jpeg" 
                     alt="Thumbnail of lubaba-asim-invite-card.png"
                     width="256"
                     height="256"
@@ -2591,7 +2537,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/malayalam-aa.png" title="View malayalam-aa.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vKNEugIWy1-256.jpeg" 
+                    src="/images/thumbnails/F5WdonKvp6-800.jpeg" 
                     alt="Thumbnail of malayalam-aa.png"
                     width="256"
                     height="256"
@@ -2605,7 +2551,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/malayalam-ka.png" title="View malayalam-ka.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/KZ1bzve9fW-256.jpeg" 
+                    src="/images/thumbnails/nnTTkf7QfQ-800.jpeg" 
                     alt="Thumbnail of malayalam-ka.png"
                     width="256"
                     height="256"
@@ -2619,7 +2565,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/malayalam-la.png" title="View malayalam-la.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/kYymzYgXI8-256.jpeg" 
+                    src="/images/thumbnails/fS310L5qjY-800.jpeg" 
                     alt="Thumbnail of malayalam-la.png"
                     width="256"
                     height="256"
@@ -2633,7 +2579,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2019/malayalam-sha.png" title="View malayalam-sha.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/5YoljJXvWQ-256.jpeg" 
+                    src="/images/thumbnails/TIMPFJklcU-800.jpeg" 
                     alt="Thumbnail of malayalam-sha.png"
                     width="256"
                     height="256"
@@ -2647,7 +2593,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2020/Sruthi Card.png" title="View Sruthi Card.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8xJAfAdyYQ-256.jpeg" 
+                    src="/images/thumbnails/IIS0-drI5h-640.jpeg" 
                     alt="Thumbnail of Sruthi Card.png"
                     width="256"
                     height="256"
@@ -2661,7 +2607,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2020/copyleft-malayalm-podcast.png" title="View copyleft-malayalm-podcast.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/dS5EeI9c54-256.jpeg" 
+                    src="/images/thumbnails/RoFhIyuCN7-800.jpeg" 
                     alt="Thumbnail of copyleft-malayalm-podcast.png"
                     width="256"
                     height="256"
@@ -2675,7 +2621,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2020/lbc-brand.png" title="View lbc-brand.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ci0KCkdPmU-256.jpeg" 
+                    src="/images/thumbnails/NWzYngJvtg-800.jpeg" 
                     alt="Thumbnail of lbc-brand.png"
                     width="256"
                     height="256"
@@ -2689,7 +2635,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2020/lbc-poster.png" title="View lbc-poster.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Mfiy3NBqYb-256.jpeg" 
+                    src="/images/thumbnails/dzUR5HeQXg-454.jpeg" 
                     alt="Thumbnail of lbc-poster.png"
                     width="256"
                     height="256"
@@ -2703,7 +2649,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2020/little-blac-chouxLogo.png" title="View little-blac-chouxLogo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/bWbL5luW2z-256.jpeg" 
+                    src="/images/thumbnails/oqlncm_OOU-800.jpeg" 
                     alt="Thumbnail of little-blac-chouxLogo.png"
                     width="256"
                     height="256"
@@ -2717,7 +2663,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/MM-Book-Cover.png" title="View MM-Book-Cover.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/zStzHoKOsX-256.jpeg" 
+                    src="/images/thumbnails/Ov-ZtspZzq-800.jpeg" 
                     alt="Thumbnail of MM-Book-Cover.png"
                     width="256"
                     height="256"
@@ -2731,7 +2677,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/anish-website.png" title="View anish-website.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ryAwu70uet-256.jpeg" 
+                    src="/images/thumbnails/3v8u6WS2p7-800.jpeg" 
                     alt="Thumbnail of anish-website.png"
                     width="256"
                     height="256"
@@ -2745,7 +2691,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/onnonnara-podcast-cover.png" title="View onnonnara-podcast-cover.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Y7GvwolQXE-256.jpeg" 
+                    src="/images/thumbnails/JSDcZOdt1f-800.jpeg" 
                     alt="Thumbnail of onnonnara-podcast-cover.png"
                     width="256"
                     height="256"
@@ -2759,7 +2705,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/political-poster.png" title="View political-poster.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/bR_zT2_ZFU-256.jpeg" 
+                    src="/images/thumbnails/JlAgwZ-sdt-800.jpeg" 
                     alt="Thumbnail of political-poster.png"
                     width="256"
                     height="256"
@@ -2773,7 +2719,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/skin-talk-logo.png" title="View skin-talk-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/v-R-zKEGLs-256.jpeg" 
+                    src="/images/thumbnails/Tj9kYxYxBJ-375.jpeg" 
                     alt="Thumbnail of skin-talk-logo.png"
                     width="256"
                     height="256"
@@ -2787,7 +2733,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2022/story-monk-logo.png" title="View story-monk-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/q4Wq75lW2L-256.jpeg" 
+                    src="/images/thumbnails/dtFGJjWDMB-800.jpeg" 
                     alt="Thumbnail of story-monk-logo.png"
                     width="256"
                     height="256"
@@ -2801,7 +2747,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/Instagram post - 2.png" title="View Instagram post - 2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/IbpZUv7xFY-256.jpeg" 
+                    src="/images/thumbnails/x2YDGMpgdF-800.jpeg" 
                     alt="Thumbnail of Instagram post - 2.png"
                     width="256"
                     height="256"
@@ -2815,7 +2761,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/ML.png" title="View ML.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vUrbipXOKl-256.jpeg" 
+                    src="/images/thumbnails/NWuyCk0dB--800.jpeg" 
                     alt="Thumbnail of ML.png"
                     width="256"
                     height="256"
@@ -2829,7 +2775,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/anand-neethu-stamp.png" title="View anand-neethu-stamp.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/SvjAVi6JN8-256.jpeg" 
+                    src="/images/thumbnails/GTIqaQtAvb-300.jpeg" 
                     alt="Thumbnail of anand-neethu-stamp.png"
                     width="256"
                     height="256"
@@ -2843,7 +2789,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/december-branding.png" title="View december-branding.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/8CIh-KsIYo-256.jpeg" 
+                    src="/images/thumbnails/IRjeAGP0Qu-800.jpeg" 
                     alt="Thumbnail of december-branding.png"
                     width="256"
                     height="256"
@@ -2857,7 +2803,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/founder-house-brand.png" title="View founder-house-brand.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/nt4IRBYX0f-256.jpeg" 
+                    src="/images/thumbnails/H3pXnt4WDT-800.jpeg" 
                     alt="Thumbnail of founder-house-brand.png"
                     width="256"
                     height="256"
@@ -2871,7 +2817,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/indic-computing-logo.png" title="View indic-computing-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/eQ-xJp___h-256.jpeg" 
+                    src="/images/thumbnails/t1wkwRoS4U-800.jpeg" 
                     alt="Thumbnail of indic-computing-logo.png"
                     width="256"
                     height="256"
@@ -2885,7 +2831,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/indic-law-logo.png" title="View indic-law-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/tbar9Flq67-256.jpeg" 
+                    src="/images/thumbnails/xOWw-sjjg1-800.jpeg" 
                     alt="Thumbnail of indic-law-logo.png"
                     width="256"
                     height="256"
@@ -2899,7 +2845,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/kkpp-malayalam-tee.png" title="View kkpp-malayalam-tee.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ChItn7EDzQ-256.jpeg" 
+                    src="/images/thumbnails/g90G2IUUDz-800.jpeg" 
                     alt="Thumbnail of kkpp-malayalam-tee.png"
                     width="256"
                     height="256"
@@ -2913,7 +2859,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/nassau-branding.gif" title="View nassau-branding.gif" class="item-link">
                 <img 
-                    src="/images/thumbnails/98rx6Aaknv-256.jpeg" 
+                    src="/images/thumbnails/1ogMebdD34-800.jpeg" 
                     alt="Thumbnail of nassau-branding.gif"
                     width="256"
                     height="256"
@@ -2927,7 +2873,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/noba-icon.png" title="View noba-icon.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/BEZoxNvywx-256.jpeg" 
+                    src="/images/thumbnails/Tg84wrsOkn-800.jpeg" 
                     alt="Thumbnail of noba-icon.png"
                     width="256"
                     height="256"
@@ -2941,7 +2887,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/noba-logo.png" title="View noba-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/9BlZb-pt4f-256.jpeg" 
+                    src="/images/thumbnails/0T0bbJVk6Y-800.jpeg" 
                     alt="Thumbnail of noba-logo.png"
                     width="256"
                     height="256"
@@ -2955,7 +2901,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/open-streetmap-alt-color.png" title="View open-streetmap-alt-color.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/FqLFStNXOP-256.jpeg" 
+                    src="/images/thumbnails/VEl4nRlCOn-800.jpeg" 
                     alt="Thumbnail of open-streetmap-alt-color.png"
                     width="256"
                     height="256"
@@ -2969,7 +2915,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/open-streetmap-kerala-final.png" title="View open-streetmap-kerala-final.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/oUKihelFRZ-256.jpeg" 
+                    src="/images/thumbnails/03lAqxILI4-800.jpeg" 
                     alt="Thumbnail of open-streetmap-kerala-final.png"
                     width="256"
                     height="256"
@@ -2983,7 +2929,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/payyans-icon.png" title="View payyans-icon.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Tx17cU-SNO-256.jpeg" 
+                    src="/images/thumbnails/IsSD4kmvgA-800.jpeg" 
                     alt="Thumbnail of payyans-icon.png"
                     width="256"
                     height="256"
@@ -2997,7 +2943,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/payyans-ui-1.png" title="View payyans-ui-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/WOx7F0Vxt_-256.jpeg" 
+                    src="/images/thumbnails/seTMPCdUWQ-800.jpeg" 
                     alt="Thumbnail of payyans-ui-1.png"
                     width="256"
                     height="256"
@@ -3011,7 +2957,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/payyans-ui-2.png" title="View payyans-ui-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ghcQb0RrzM-256.jpeg" 
+                    src="/images/thumbnails/MoR86Cv6mL-800.jpeg" 
                     alt="Thumbnail of payyans-ui-2.png"
                     width="256"
                     height="256"
@@ -3025,7 +2971,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/poorna-keyboard-icon.png" title="View poorna-keyboard-icon.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/m6bzEDdlMn-256.jpeg" 
+                    src="/images/thumbnails/U9F9bqotdW-800.jpeg" 
                     alt="Thumbnail of poorna-keyboard-icon.png"
                     width="256"
                     height="256"
@@ -3039,7 +2985,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/potato-union-logo.png" title="View potato-union-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/PFyTH1aMVm-256.jpeg" 
+                    src="/images/thumbnails/CPpX2jKNHT-800.jpeg" 
                     alt="Thumbnail of potato-union-logo.png"
                     width="256"
                     height="256"
@@ -3053,7 +2999,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/sahya-idea.png" title="View sahya-idea.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/KbFzTZWjyv-256.jpeg" 
+                    src="/images/thumbnails/bk7C0hI4WM-800.jpeg" 
                     alt="Thumbnail of sahya-idea.png"
                     width="256"
                     height="256"
@@ -3067,7 +3013,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2023/sahya-logo.png" title="View sahya-logo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/QamwOQ42T9-256.jpeg" 
+                    src="/images/thumbnails/5qqg52g_Bc-800.jpeg" 
                     alt="Thumbnail of sahya-logo.png"
                     width="256"
                     height="256"
@@ -3081,7 +3027,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/akashamittayi-malayalam-photo.png" title="View akashamittayi-malayalam-photo.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/yhJURgbZpZ-256.jpeg" 
+                    src="/images/thumbnails/BlSMjV9kqY-800.jpeg" 
                     alt="Thumbnail of akashamittayi-malayalam-photo.png"
                     width="256"
                     height="256"
@@ -3095,7 +3041,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/akashamittayi-malayalam-short.png" title="View akashamittayi-malayalam-short.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/vw-qdW17hz-256.jpeg" 
+                    src="/images/thumbnails/326EMkFe6U-800.jpeg" 
                     alt="Thumbnail of akashamittayi-malayalam-short.png"
                     width="256"
                     height="256"
@@ -3109,7 +3055,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/akashamittayi-malayalam-type.png" title="View akashamittayi-malayalam-type.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/hY13g3xbTf-256.jpeg" 
+                    src="/images/thumbnails/bsNtowu9Oi-800.jpeg" 
                     alt="Thumbnail of akashamittayi-malayalam-type.png"
                     width="256"
                     height="256"
@@ -3123,7 +3069,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/calendar-ui-1.png" title="View calendar-ui-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/C5iTtkEbJb-256.jpeg" 
+                    src="/images/thumbnails/tvwKzYPFs9-685.jpeg" 
                     alt="Thumbnail of calendar-ui-1.png"
                     width="256"
                     height="256"
@@ -3137,7 +3083,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/calendar-ui-2.png" title="View calendar-ui-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/ggxnzcYFuH-256.jpeg" 
+                    src="/images/thumbnails/bthTR1F5Q9-685.jpeg" 
                     alt="Thumbnail of calendar-ui-2.png"
                     width="256"
                     height="256"
@@ -3151,7 +3097,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/drupal-trivandrum-sticker.png" title="View drupal-trivandrum-sticker.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/uU04veZZKG-256.jpeg" 
+                    src="/images/thumbnails/9Q3gNs3J8s-800.jpeg" 
                     alt="Thumbnail of drupal-trivandrum-sticker.png"
                     width="256"
                     height="256"
@@ -3165,7 +3111,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/grandham-ui-home.gif" title="View grandham-ui-home.gif" class="item-link">
                 <img 
-                    src="/images/thumbnails/9CdtKsCTjD-256.jpeg" 
+                    src="/images/thumbnails/THvbHFXxtw-800.jpeg" 
                     alt="Thumbnail of grandham-ui-home.gif"
                     width="256"
                     height="256"
@@ -3179,7 +3125,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/isai-card-birthday.png" title="View isai-card-birthday.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/rQmUhoRpRv-256.jpeg" 
+                    src="/images/thumbnails/WrkDSGGh9r-800.jpeg" 
                     alt="Thumbnail of isai-card-birthday.png"
                     width="256"
                     height="256"
@@ -3193,7 +3139,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/karmam-poster-home.png" title="View karmam-poster-home.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/uSdV-SsKAL-256.jpeg" 
+                    src="/images/thumbnails/ofKU8cU39q-800.jpeg" 
                     alt="Thumbnail of karmam-poster-home.png"
                     width="256"
                     height="256"
@@ -3207,7 +3153,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/meenaviyal-site-ui.png" title="View meenaviyal-site-ui.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/1mcAhB1uk--256.jpeg" 
+                    src="/images/thumbnails/PB3bVmmgPE-800.jpeg" 
                     alt="Thumbnail of meenaviyal-site-ui.png"
                     width="256"
                     height="256"
@@ -3221,7 +3167,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/nandu-ham-sticker-car.png" title="View nandu-ham-sticker-car.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/6B5GXAdGy5-256.jpeg" 
+                    src="/images/thumbnails/lwqtAw-F5i-800.jpeg" 
                     alt="Thumbnail of nandu-ham-sticker-car.png"
                     width="256"
                     height="256"
@@ -3235,7 +3181,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/nandu-ham-stickers.png" title="View nandu-ham-stickers.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/VX_meB2ZbZ-256.jpeg" 
+                    src="/images/thumbnails/CJ9X6e9rYz-800.jpeg" 
                     alt="Thumbnail of nandu-ham-stickers.png"
                     width="256"
                     height="256"
@@ -3249,7 +3195,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/smc-fonts-home.gif" title="View smc-fonts-home.gif" class="item-link">
                 <img 
-                    src="/images/thumbnails/U-fdVhXTU0-256.jpeg" 
+                    src="/images/thumbnails/JzN3vmiSrQ-800.jpeg" 
                     alt="Thumbnail of smc-fonts-home.gif"
                     width="256"
                     height="256"
@@ -3263,7 +3209,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/smc-fonts-listing.gif" title="View smc-fonts-listing.gif" class="item-link">
                 <img 
-                    src="/images/thumbnails/O5F-p9PdqG-256.jpeg" 
+                    src="/images/thumbnails/vPlNzAT647-800.jpeg" 
                     alt="Thumbnail of smc-fonts-listing.gif"
                     width="256"
                     height="256"
@@ -3277,7 +3223,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/smc-glyphs.png" title="View smc-glyphs.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/CUMrFO3qCs-256.jpeg" 
+                    src="/images/thumbnails/tDAJi9veKM-800.jpeg" 
                     alt="Thumbnail of smc-glyphs.png"
                     width="256"
                     height="256"
@@ -3291,7 +3237,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/undercover-brand-1.png" title="View undercover-brand-1.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/EWc8qBVP5A-256.jpeg" 
+                    src="/images/thumbnails/xRgiJav-S5-800.jpeg" 
                     alt="Thumbnail of undercover-brand-1.png"
                     width="256"
                     height="256"
@@ -3305,7 +3251,7 @@
         </article><article class="item" role="listitem">
             <a href="/images/2024/undercover-brand-2.png" title="View undercover-brand-2.png" class="item-link">
                 <img 
-                    src="/images/thumbnails/Ll5vgDHJmV-256.jpeg" 
+                    src="/images/thumbnails/s116YRNcv6-800.jpeg" 
                     alt="Thumbnail of undercover-brand-2.png"
                     width="256"
                     height="256"
@@ -3318,10 +3264,5 @@
             </a>
         </article></div>
 </main>
-<footer>
-    <nav aria-label="Site links">
-    I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
-    </nav>
-</footer>
 </body>
 </html>
