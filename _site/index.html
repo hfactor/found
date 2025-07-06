@@ -5,25 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Collection of my design work since 2007, presented without commentary.">
     <meta name="theme-color" content="#F7F7F7">
-    <title>GRID</title>
+    <title>made_</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --color-background: #F7F7F7;
-            --color-brand: #EB5503;
+            --color-background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
             --color-text: #141414;
-            --color-subtext: #949494;
-            --spacing-base: 14px;
-            --spacing-double: 32px;
-            --font-size-base: 14px;
-            --font-size-large: 16px;
+            --spacing: 16px;
+            --font-size: 14px;
+            --font-family: 'Space Grotesk', sans-serif;
+            --max-width: 1200px;
         }
 
-        /* Reset and base styles */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -33,10 +28,10 @@
         body {
             background: var(--color-background);
             color: var(--color-text);
-            font-family: 'Silkscreen', sans-serif;
-            font-size: var(--font-size-base);
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            font-weight: 300;
             line-height: 1.2;
-            margin: 0;
         }
 
         img {
@@ -45,50 +40,51 @@
             height: auto;
         }
 
-        /* Typography */
-        h1, h2 {
-            font-size: var(--font-size-large);
-            font-weight: 400;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Layout Components */
-        .controls {
-            padding: var(--spacing-double);
+        header, footer {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
         .title {
-            font-size: 4rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
+            font-size: clamp(40px, 15vw, 220px);
+            font-weight: 100;
+            margin: 0;
             line-height: 1;
+            letter-spacing: -0.11em;
+        }
+
+        .title::after {
+            content: "_";
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .description {
-            max-width: 400px;
-            color: var(--color-subtext);
+            max-width: 600px;
+            color: var(--color-text);
+            font-weight: 300;
+            font-size: var(--font-size);
         }
 
         .description a {
             text-decoration: underline;
+            color: var(--color-text);
         }
 
-        .description a:hover {
-            color: var(--color-brand);
-        }
-
-        /* Grid Layout */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-double);
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
         .item {
@@ -97,6 +93,17 @@
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            font-weight: 700;
+        }
+
+        .item.hidden {
+            display: none;
+        }
+
+        .item.loaded {
+            opacity: 1;
         }
 
         .item.wide {
@@ -120,12 +127,17 @@
         }
 
         .item-info {
-            position: relative;
-            color: var(--color-text);
-            font-size: var(--font-size-base);
-            text-align: right;
+            position: absolute;
+            top: var(--spacing);
+            left: var(--spacing);
+            color: #8c8c8c;
+            font-size: var(--font-size);
+            font-weight: 300;
+            text-align: left;
             opacity: 0;
             transition: opacity 0.2s ease;
+            z-index: 1;
+           
         }
 
         .item:hover .item-info {
@@ -144,3138 +156,865 @@
             content: " • ";
         }
 
-        /* Mobile Optimizations */
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         @media (max-width: 768px) {
-            :root {
-                --spacing-base: 12px;
-                --spacing-double: 24px;
-            }
-
-            .controls {
+            header, footer {
                 flex-direction: column;
-                gap: var(--spacing-base);
-            }
-
-            .title {
-                font-size: 3rem;
-            }
-
-            .grid {
-                gap: var(--spacing-base);
+                gap: var(--spacing);
+                align-items: flex-start;
             }
         }
 
-        /* Print Styles */
         @media print {
             body {
                 background: none;
             }
         }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: var(--spacing);
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: var(--font-size);
+            font-weight: 300;
+            color: var(--color-text);
+            opacity: 0.8;
+        }
+
+        .footer-text a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 2px;
+                align-items: flex-start;
+            }
+        }
+
+        .load-more {
+            padding: var(--spacing) 0;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 64px;
+        }
+
+        .load-more-button {
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            font-weight: 300;
+            cursor: pointer;
+            padding: 8px 16px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .load-more-button:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <header class="controls">
-    <h1 class="title">GRID</h1>
+    <header>
+    <h1 class="title">made_</h1>
     <div class="description">
-        I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
+    I never kept a portfolio. This is where some of them ended up. No context, no case studies. Just pieces of work, scattered over time. I’ll keep adding more. If you’ve got something I missed, <a href="mailto:hiran.v@gmail.com">send it over.</a>. 
     </div>
 </header>
 <main>
-    <div class="items grid" role="list"><article class="item" role="listitem">
+    <div class="items grid" role="list"><article class="item" role="listitem" data-index="1">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/RjpUp7Laz--220.jpeg" 
-                    alt="Thumbnail of against-ignorance-logo-small.png"
+                    src="/images/thumbnails/NNWQK5fdZM-800.jpeg" 
+                    alt="Thumbnail of mindhelix-technology-brand.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">AGAINST IGNORANCE LOGO SMALL</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Xor1sSiHP9-782.jpeg" 
-                    alt="Thumbnail of kairos-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">KAIROS LOGO</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/SWSy4VssK--800.jpeg" 
-                    alt="Thumbnail of hiran_vc_smt.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HIRAN VC SMT</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/pSKE6Mkrx6-800.jpeg" 
-                    alt="Thumbnail of moving-republic-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MOVING REPUBLIC CARD</span>
-                    <span class="item-folder">2008</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/xK8kD7RnQT-540.jpeg" 
-                    alt="Thumbnail of foodielogo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FOODIELOGO</span>
+                    <span class="item-title">MINDHELIX TECHNOLOGY BRAND</span>
                     <span class="item-folder">2012</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item" role="listitem" data-index="2">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/uTJiFBd_zx-800.jpeg" 
-                    alt="Thumbnail of exl-logo-melvin.png"
+                    src="/images/thumbnails/sg-gMabXmJ-600.jpeg" 
+                    alt="Thumbnail of indic-keyboard-icon.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">EXL LOGO MELVIN</span>
+                    <span class="item-title">INDIC KEYBOARD ICON</span>
+                    <span class="item-folder">2023</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="3">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/qqQWY_tWpr-600.jpeg" 
+                    alt="Thumbnail of moving-republic-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">MOVING REPUBLIC IDENTITY</span>
+                    <span class="item-folder">2008</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="4">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/n7trONWNA_-600.jpeg" 
+                    alt="Thumbnail of noba-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">NOBA BRANDING</span>
+                    <span class="item-folder">2024</span>
+                </div>
+            </div>
+        </article><article class="item wide" role="listitem" data-index="5">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/S6RNiIjb_3-600.jpeg" 
+                    alt="Thumbnail of brande-print-magazine-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">BRANDE PRINT MAGAZINE IDENTITY</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="6">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/3QVrIvRDwe-600.jpeg" 
+                    alt="Thumbnail of cliche-productions-brand.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">CLICHE PRODUCTIONS BRAND</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="7">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/IFiFIicObx-600.jpeg" 
+                    alt="Thumbnail of bluebream-opensource-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">BLUEBREAM OPENSOURCE IDENTITY</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="8">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/S496K4mBQy-600.jpeg" 
+                    alt="Thumbnail of noba-handmade-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">NOBA HANDMADE BRANDING</span>
+                    <span class="item-folder">2024</span>
+                </div>
+            </div>
+        </article><article class="item" role="listitem" data-index="9">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/tJwhfTsYyA-600.jpeg" 
+                    alt="Thumbnail of quintype-bold-cms-newsreel.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">QUINTYPE BOLD CMS NEWSREEL</span>
+                    <span class="item-folder">2019</span>
+                </div>
+            </div>
+        </article><article class="item wide" role="listitem" data-index="10">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/PoP3OXCgWc-600.jpeg" 
+                    alt="Thumbnail of varnam-opensource-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">VARNAM OPENSOURCE BRANDING</span>
+                    <span class="item-folder">2019</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="11">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/LPDwAt5fDV-600.jpeg" 
+                    alt="Thumbnail of namma-khasak-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">NAMMA KHASAK BRANDING</span>
+                    <span class="item-folder">2014</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="12">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/5ja0X206vN-600.jpeg" 
+                    alt="Thumbnail of rufscript-kindle-typeface.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">RUFSCRIPT KINDLE TYPEFACE</span>
+                    <span class="item-folder">2008</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="13">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/IR-m9ZOHqU-600.jpeg" 
+                    alt="Thumbnail of malayalam-caligraphy-a.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">MALAYALAM CALIGRAPHY A</span>
+                    <span class="item-folder">2018</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="14">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/WhEEmCcxpg-600.jpeg" 
+                    alt="Thumbnail of pullman-terminus-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">PULLMAN TERMINUS BRANDING</span>
                     <span class="item-folder">2011</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item wide hidden" role="listitem" data-index="15">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/ELcHdNTkFK-800.jpeg" 
-                    alt="Thumbnail of freesoftware-event-banner.png"
+                    src="/images/thumbnails/3hDQ0q5bnM-600.jpeg" 
+                    alt="Thumbnail of malayalam-caligraphy-ksha.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">FREESOFTWARE EVENT BANNER</span>
+                    <span class="item-title">MALAYALAM CALIGRAPHY KSHA</span>
+                    <span class="item-folder">2018</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="16">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/WpymudEGkK-600.jpeg" 
+                    alt="Thumbnail of dubai-agency-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">DUBAI AGENCY BRANDING</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="17">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/VHN-G_OzNp-600.jpeg" 
+                    alt="Thumbnail of wedding-invitation.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">WEDDING INVITATION</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="18">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/aTN4-r2n2o-600.jpeg" 
+                    alt="Thumbnail of potato-union-consultation-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">POTATO UNION CONSULTATION BRANDING</span>
+                    <span class="item-folder">2024</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="19">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/VmINXh18TI-600.jpeg" 
+                    alt="Thumbnail of rufscript-typeface.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">RUFSCRIPT TYPEFACE</span>
+                    <span class="item-folder">2008</span>
+                </div>
+            </div>
+        </article><article class="item wide hidden" role="listitem" data-index="20">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/Yr9avbnuDR-600.jpeg" 
+                    alt="Thumbnail of builders-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">BUILDERS BRANDING</span>
+                    <span class="item-folder">2011</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="21">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/ALkdqIOHC2-600.jpeg" 
+                    alt="Thumbnail of founders-house-community-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">FOUNDERS HOUSE COMMUNITY BRANDING</span>
+                    <span class="item-folder">2024</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="22">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/rD4ed9_bM5-600.jpeg" 
+                    alt="Thumbnail of storymonk-news-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">STORYMONK NEWS BRANDING</span>
+                    <span class="item-folder">2023</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="23">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/ICAtxD4mZi-600.jpeg" 
+                    alt="Thumbnail of indic-law-publishing-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">INDIC LAW PUBLISHING IDENTITY</span>
+                    <span class="item-folder">2019</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="24">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/hlfmhtXSTw-600.jpeg" 
+                    alt="Thumbnail of malayalam-news-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">MALAYALAM NEWS BRANDING</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item wide hidden" role="listitem" data-index="25">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/ruXtZyhZ1d-600.jpeg" 
+                    alt="Thumbnail of wearable-caligraphy-commised-ringwork.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">WEARABLE CALIGRAPHY COMMISED RINGWORK</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="26">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/UHIKdoN8K7-600.jpeg" 
+                    alt="Thumbnail of malayalam-caligraphy-nka.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">MALAYALAM CALIGRAPHY NKA</span>
+                    <span class="item-folder">2018</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="27">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/ahKZkorbVf-600.jpeg" 
+                    alt="Thumbnail of malayalam-caligraphy.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">MALAYALAM CALIGRAPHY</span>
+                    <span class="item-folder">2011</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="28">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/oANu7epRVj-600.jpeg" 
+                    alt="Thumbnail of thinkthank-foundation-dubai-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">THINKTHANK FOUNDATION DUBAI BRANDING</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="29">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/a-tgXsg5q0-600.jpeg" 
+                    alt="Thumbnail of copyleft-malayalam-podcast-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">COPYLEFT MALAYALAM PODCAST IDENTITY</span>
+                    <span class="item-folder">2023</span>
+                </div>
+            </div>
+        </article><article class="item wide hidden" role="listitem" data-index="30">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/QfCRRHjd8h-600.jpeg" 
+                    alt="Thumbnail of quintype-bold-cms-media-gallery.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">QUINTYPE BOLD CMS MEDIA GALLERY</span>
+                    <span class="item-folder">2019</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="31">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/d8J0TwJTZ--600.jpeg" 
+                    alt="Thumbnail of novotel-fester-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">NOVOTEL FESTER BRANDING</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="32">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/2urJqcaz3X-600.jpeg" 
+                    alt="Thumbnail of namma-khasak-photo-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">NAMMA KHASAK PHOTO BRANDING</span>
+                    <span class="item-folder">2014</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="33">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/lBNHLdv0nk-600.jpeg" 
+                    alt="Thumbnail of unitac-builders-brand.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">UNITAC BUILDERS BRAND</span>
+                    <span class="item-folder">2013</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="34">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/Ssx8-jPplQ-600.jpeg" 
+                    alt="Thumbnail of saltmangotree-agency-identity.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">SALTMANGOTREE AGENCY IDENTITY</span>
+                    <span class="item-folder">2010</span>
+                </div>
+            </div>
+        </article><article class="item wide hidden" role="listitem" data-index="35">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/rUSpphVefz-600.jpeg" 
+                    alt="Thumbnail of fryingpan-marketing-academy-brand.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">FRYINGPAN MARKETING ACADEMY BRAND</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="36">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/rgvHvcukHi-600.jpeg" 
+                    alt="Thumbnail of community-rights-event-brand.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">COMMUNITY RIGHTS EVENT BRAND</span>
+                    <span class="item-folder">2012</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="37">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/muRYVYlLsA-600.jpeg" 
+                    alt="Thumbnail of littleblackchoux-cafe-branding.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">LITTLEBLACKCHOUX CAFE BRANDING</span>
+                    <span class="item-folder">2019</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="38">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/CXdRaQpzL2-600.jpeg" 
+                    alt="Thumbnail of dyuthi-malayalam-typeface.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">DYUTHI MALAYALAM TYPEFACE</span>
                     <span class="item-folder">2009</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="39">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/CvgRSecb8l-145.jpeg" 
-                    alt="Thumbnail of coftweet.png"
+                    src="/images/thumbnails/M0tk7ccZra-600.jpeg" 
+                    alt="Thumbnail of centre-a-offices-brand-identity.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">COFTWEET</span>
-                    <span class="item-folder">2010</span>
+                    <span class="item-title">CENTRE A OFFICES BRAND IDENTITY</span>
+                    <span class="item-folder">2014</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item wide hidden" role="listitem" data-index="40">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/hmVw7y5_3x-800.jpeg" 
-                    alt="Thumbnail of knowledge-rights-logo.png"
+                    src="/images/thumbnails/1VXmhYn-_7-600.jpeg" 
+                    alt="Thumbnail of chalimachine-identity.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">KNOWLEDGE RIGHTS LOGO</span>
-                    <span class="item-folder">2008</span>
+                    <span class="item-title">CHALIMACHINE IDENTITY</span>
+                    <span class="item-folder">2014</span>
                 </div>
             </div>
-        </article><article class="item wide" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="41">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/VTOMUuhGtF-800.jpeg" 
-                    alt="Thumbnail of fpanlogo.png"
+                    src="/images/thumbnails/YzAjyTzusv-600.jpeg" 
+                    alt="Thumbnail of ftv-sandkastle-identity.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">FPANLOGO</span>
+                    <span class="item-title">FTV SANDKASTLE IDENTITY</span>
                     <span class="item-folder">2012</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="42">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/0gsD92ALyI-800.jpeg" 
-                    alt="Thumbnail of gnew-logo.png"
+                    src="/images/thumbnails/EhHdnbCOTx-600.jpeg" 
+                    alt="Thumbnail of rumore-dubai-event-identity.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">GNEW LOGO</span>
-                    <span class="item-folder">2010</span>
+                    <span class="item-title">RUMORE DUBAI EVENT IDENTITY</span>
+                    <span class="item-folder">2012</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="43">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/OqY77l_1-8-800.jpeg" 
-                    alt="Thumbnail of pullman-logo-2.jpg"
+                    src="/images/thumbnails/-oAOEv7_TH-600.jpeg" 
+                    alt="Thumbnail of malayalam-sticker.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">PULLMAN LOGO 2</span>
+                    <span class="item-title">MALAYALAM STICKER</span>
+                    <span class="item-folder">2014</span>
+                </div>
+            </div>
+        </article><article class="item hidden" role="listitem" data-index="44">
+            <div class="item-link">
+                <img 
+                    src="/images/thumbnails/3hiSmIL2aj-600.jpeg" 
+                    alt="Thumbnail of wedding-calligraphy.png"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">WEDDING CALLIGRAPHY</span>
                     <span class="item-folder">2011</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item wide hidden" role="listitem" data-index="45">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/9L7O4yMeRT-800.jpeg" 
-                    alt="Thumbnail of Zazu.png"
+                    src="/images/thumbnails/KQzD6qIQZn-600.jpeg" 
+                    alt="Thumbnail of december-backhouse-branding.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">ZAZU</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/_Mts_eT6pz-800.jpeg" 
-                    alt="Thumbnail of samvada-ui-screen.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SAMVADA UI SCREEN</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/F8OogXNHSQ-800.jpeg" 
-                    alt="Thumbnail of izha-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">IZHA LOGO</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/1ogMebdD34-800.jpeg" 
-                    alt="Thumbnail of nassau-branding.gif"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NASSAU BRANDING.GIF</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/1oXbjXBdDn-760.jpeg" 
-                    alt="Thumbnail of against-ignorance-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">AGAINST IGNORANCE LOGO</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/j-we5OA8hD-800.jpeg" 
-                    alt="Thumbnail of muraligopi-story-title-.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MURALIGOPI STORY TITLE </span>
-                    <span class="item-folder">2016</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/jM7Bs3bRdS-779.jpeg" 
-                    alt="Thumbnail of centre-a-paper.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CENTRE A PAPER</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/9yWmgrnSI_-800.jpeg" 
-                    alt="Thumbnail of sneha-ring-design-one.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SNEHA RING DESIGN ONE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/1PgzOhL3wd-800.jpeg" 
-                    alt="Thumbnail of SL-English-Homepage.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SL ENGLISH HOMEPAGE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ho2Q83AVQI-750.jpeg" 
-                    alt="Thumbnail of final-card-mobile.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FINAL CARD MOBILE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/xI9Fphu-9J-800.jpeg" 
-                    alt="Thumbnail of deepthi-sarath-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DEEPTHI SARATH CARD</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/W__N6yD_rq-800.jpeg" 
-                    alt="Thumbnail of Reporting-UI-6.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">REPORTING UI 6</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/jr_2GJiL9S-600.jpeg" 
-                    alt="Thumbnail of oricards-01.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ORICARDS 01</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/fTffTvUF6d-800.jpeg" 
-                    alt="Thumbnail of gnu-wallpaper.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">GNU WALLPAPER</span>
-                    <span class="item-folder">2008</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/DQD6dY3yxg-800.jpeg" 
-                    alt="Thumbnail of greenleaf-productions-logos.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">GREENLEAF PRODUCTIONS LOGOS</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3vSyqAUCOI-768.jpeg" 
-                    alt="Thumbnail of wedding-amit-card.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">WEDDING AMIT CARD</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/XF0PgGd9d5-706.jpeg" 
-                    alt="Thumbnail of manikandavijayam-event.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MANIKANDAVIJAYAM EVENT</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3v8u6WS2p7-800.jpeg" 
-                    alt="Thumbnail of anish-website.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ANISH WEBSITE</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/JSDcZOdt1f-800.jpeg" 
-                    alt="Thumbnail of onnonnara-podcast-cover.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ONNONNARA PODCAST COVER</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/fIujQSrMXR-800.jpeg" 
-                    alt="Thumbnail of arya-kadhakalil-invite.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ARYA KADHAKALIL INVITE</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/yyG_WKseyV-800.jpeg" 
-                    alt="Thumbnail of rathri-caligraphy.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">RATHRI CALIGRAPHY</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/j7Drl-AORK-800.jpeg" 
-                    alt="Thumbnail of rejected-logos.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">REJECTED LOGOS</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/bzza2XgTXG-800.jpeg" 
-                    alt="Thumbnail of induspride-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">INDUSPRIDE UI</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/5qqg52g_Bc-800.jpeg" 
-                    alt="Thumbnail of sahya-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SAHYA LOGO</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/NnxNT5j1y5-708.jpeg" 
-                    alt="Thumbnail of smc-book-9.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC BOOK 9</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ImNwZ9gcRB-800.jpeg" 
-                    alt="Thumbnail of indic-keyboard.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">INDIC KEYBOARD</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/9vQ1AmNey5-800.jpeg" 
-                    alt="Thumbnail of lubaba-asim-invite-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LUBABA ASIM INVITE CARD</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/nPAy5D8H8x-800.jpeg" 
-                    alt="Thumbnail of sandkastle.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SANDKASTLE</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ELQhPnM-Nm-800.jpeg" 
-                    alt="Thumbnail of hiran_vc_smt_back.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HIRAN VC SMT BACK</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/7UDupDG5hl-800.jpeg" 
-                    alt="Thumbnail of centre-a-bro-1.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CENTRE A BRO 1</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ofKU8cU39q-800.jpeg" 
-                    alt="Thumbnail of karmam-poster-home.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">KARMAM POSTER HOME</span>
+                    <span class="item-title">DECEMBER BACKHOUSE BRANDING</span>
                     <span class="item-folder">2024</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="46">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/x8OLg99e63-800.jpeg" 
-                    alt="Thumbnail of indic-keyboard-v2.png"
+                    src="/images/thumbnails/sOx4C5RIUa-600.jpeg" 
+                    alt="Thumbnail of court-of-dinkan-identity.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">INDIC KEYBOARD V2</span>
-                    <span class="item-folder">2013</span>
+                    <span class="item-title">COURT OF DINKAN IDENTITY</span>
+                    <span class="item-folder">2014</span>
                 </div>
             </div>
-        </article><article class="item wide" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="47">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/1HOFLewJmE-800.jpeg" 
-                    alt="Thumbnail of front-postal.png"
+                    src="/images/thumbnails/H0dlhvWQ_H-600.jpeg" 
+                    alt="Thumbnail of onnonnara-podcast-branding.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">FRONT POSTAL</span>
+                    <span class="item-title">ONNONNARA PODCAST BRANDING</span>
                     <span class="item-folder">2019</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="48">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/VAELpVE0Kf-800.jpeg" 
-                    alt="Thumbnail of think-tank-logos.png"
+                    src="/images/thumbnails/bq-SugQ_Ux-600.jpeg" 
+                    alt="Thumbnail of quintype-bold-cms-media-analytics.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">THINK TANK LOGOS</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/L6tT4Aa-Pz-800.jpeg" 
-                    alt="Thumbnail of cycle-group-quintype.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CYCLE GROUP QUINTYPE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/McldcdZjv6-800.jpeg" 
-                    alt="Thumbnail of Pumba.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PUMBA</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/6O8vM6YZMQ-800.jpeg" 
-                    alt="Thumbnail of santosh-card-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SANTOSH CARD 2</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/FBsELUI2R0-800.jpeg" 
-                    alt="Thumbnail of kolappulliappan-bike-sticker.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">KOLAPPULLIAPPAN BIKE STICKER</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/2eLpiwIa3N-800.jpeg" 
-                    alt="Thumbnail of label.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LABEL</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/RUnToGz9uA-800.jpeg" 
-                    alt="Thumbnail of harthall-cal_detailed.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HARTHALL CAL DETAILED</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/E1Y1ufZsDE-732.jpeg" 
-                    alt="Thumbnail of ivlast.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">IVLAST</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/gvSvtNFK7u-800.jpeg" 
-                    alt="Thumbnail of we-the-womeni-ui-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">WE THE WOMENI UI 2</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/CnEBdP_e9i-800.jpeg" 
-                    alt="Thumbnail of nm-group.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NM GROUP</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/bk7C0hI4WM-800.jpeg" 
-                    alt="Thumbnail of sahya-idea.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SAHYA IDEA</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/7lx9gBHR9C-800.jpeg" 
-                    alt="Thumbnail of iv_without.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">IV WITHOUT</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/4sI8ullDSN-800.jpeg" 
-                    alt="Thumbnail of pullman-logo-1.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PULLMAN LOGO 1</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/FNHWTPPXwV-800.jpeg" 
-                    alt="Thumbnail of mozilla-badges-03.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MOZILLA BADGES 03</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/J4-k_Qn_4I-800.jpeg" 
-                    alt="Thumbnail of chomchom-web-UI.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CHOMCHOM WEB UI</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/bthTR1F5Q9-685.jpeg" 
-                    alt="Thumbnail of calendar-ui-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CALENDAR UI 2</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/xkRYvNvfMD-800.jpeg" 
-                    alt="Thumbnail of cof-vc.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">COF VC</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/CPpX2jKNHT-800.jpeg" 
-                    alt="Thumbnail of potato-union-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">POTATO UNION LOGO</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/-xvILRZhev-800.jpeg" 
-                    alt="Thumbnail of santosh-award.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SANTOSH AWARD</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3OnjjIFrwG-800.jpeg" 
-                    alt="Thumbnail of ThemePageAdmin-01.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">THEMEPAGEADMIN 01</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/I8C3mgojpp-800.jpeg" 
-                    alt="Thumbnail of celebrateyouweb-03.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CELEBRATEYOUWEB 03</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/VM-ZMPMWe4-800.jpeg" 
-                    alt="Thumbnail of visitingcard_smc-01.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">VISITINGCARD SMC 01</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/cMmdMxbJg3-800.jpeg" 
-                    alt="Thumbnail of jinesh-book-cover.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">JINESH BOOK COVER</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/NWzYngJvtg-800.jpeg" 
-                    alt="Thumbnail of lbc-brand.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LBC BRAND</span>
-                    <span class="item-folder">2020</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/j1OeRJye5W-800.jpeg" 
-                    alt="Thumbnail of WMW-Home-Page.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">WMW HOME PAGE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/t9f4rAxkHm-653.jpeg" 
-                    alt="Thumbnail of rumor-logo-1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">RUMOR LOGO 1</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/WrkDSGGh9r-800.jpeg" 
-                    alt="Thumbnail of isai-card-birthday.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ISAI CARD BIRTHDAY</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/K6bhq_uAmE-800.jpeg" 
-                    alt="Thumbnail of Sample1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SAMPLE1</span>
+                    <span class="item-title">QUINTYPE BOLD CMS MEDIA ANALYTICS</span>
                     <span class="item-folder">2019</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="49">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/xs1q9K_KMw-800.jpeg" 
-                    alt="Thumbnail of fuel-badges.png"
+                    src="/images/thumbnails/cXJjb2JBeu-600.jpeg" 
+                    alt="Thumbnail of wikipedia-offline-cd-print.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">FUEL BADGES</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/hMV8JSHVqW-800.jpeg" 
-                    alt="Thumbnail of logo-padashekharam.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LOGO PADASHEKHARAM</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/DQKgnC4q_Q-620.jpeg" 
-                    alt="Thumbnail of smt-links-invite.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMT LINKS INVITE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ZRZpIqF7fA-800.jpeg" 
-                    alt="Thumbnail of huge-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HUGE LOGO</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/exUHZ66o9I-800.jpeg" 
-                    alt="Thumbnail of centre-a-bro-2.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CENTRE A BRO 2</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/hiGOXmFcmH-600.jpeg" 
-                    alt="Thumbnail of santosh-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SANTOSH CARD</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/fNJp9D3eLM-800.jpeg" 
-                    alt="Thumbnail of caligraphy-title.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CALIGRAPHY TITLE</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Zz37kyneyx-800.jpeg" 
-                    alt="Thumbnail of mozilla-badges-02.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MOZILLA BADGES 02</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/KIFLryZn0g-800.jpeg" 
-                    alt="Thumbnail of smt-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMT LOGO</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/uxDbSAqu79-800.jpeg" 
-                    alt="Thumbnail of LGBTee_White_Front.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LGBTEE WHITE FRONT</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/qu1poeqpVf-800.jpeg" 
-                    alt="Thumbnail of pamper-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PAMPER UI</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/7dZy3fSS4N-750.jpeg" 
-                    alt="Thumbnail of alapatt-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ALAPATT CARD</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/4ws9x5pvm1-800.jpeg" 
-                    alt="Thumbnail of sruthi-manesh.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SRUTHI MANESH</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/oqlncm_OOU-800.jpeg" 
-                    alt="Thumbnail of little-blac-chouxLogo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LITTLE BLAC CHOUXLOGO</span>
-                    <span class="item-folder">2020</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/y222yS8HpR-204.jpeg" 
-                    alt="Thumbnail of komet-kochi-metro-idea.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">KOMET KOCHI METRO IDEA</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/EDVHRTCxqZ-800.jpeg" 
-                    alt="Thumbnail of print-dialog-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PRINT DIALOG 2</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/lC80wD7cZE-667.jpeg" 
-                    alt="Thumbnail of chalo-paris-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CHALO PARIS UI</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3mH9_p3gUR-743.jpeg" 
-                    alt="Thumbnail of unitac-final-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">UNITAC FINAL LOGO</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3rhZ45M8zZ-800.jpeg" 
-                    alt="Thumbnail of metermathai-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">METERMATHAI UI</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/-ySGqfbps5-300.jpeg" 
-                    alt="Thumbnail of vibes-media-logos.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">VIBES MEDIA LOGOS</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/olR75N6b3J-621.jpeg" 
-                    alt="Thumbnail of green-website-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">GREEN WEBSITE UI</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/vz3s4_R2y1-800.jpeg" 
-                    alt="Thumbnail of harthall-cal.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HARTHALL CAL</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3BGxaD_wVW-380.jpeg" 
-                    alt="Thumbnail of mindover-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MINDOVER LOGO</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/mQd96xuK7B-799.jpeg" 
-                    alt="Thumbnail of next-election-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NEXT ELECTION LOGO</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/5LuH4aReoE-800.jpeg" 
-                    alt="Thumbnail of soappiness-coconut.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SOAPPINESS COCONUT</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/WOd03Vi1r2-651.jpeg" 
-                    alt="Thumbnail of smt-first-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMT FIRST LOGO</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/F5WdonKvp6-800.jpeg" 
-                    alt="Thumbnail of malayalam-aa.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MALAYALAM AA</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/TY5QNgWnQS-800.jpeg" 
-                    alt="Thumbnail of Simba.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SIMBA</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/lwqtAw-F5i-800.jpeg" 
-                    alt="Thumbnail of nandu-ham-sticker-car.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NANDU HAM STICKER CAR</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/nNVQCUJBtm-800.jpeg" 
-                    alt="Thumbnail of 5. Logo with BG.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">5. LOGO WITH BG</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/SvlWSSELup-800.jpeg" 
-                    alt="Thumbnail of rejected-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">REJECTED LOGO</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/lP_Oi25QbB-800.jpeg" 
-                    alt="Thumbnail of moving-republic-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MOVING REPUBLIC LOGO</span>
-                    <span class="item-folder">2008</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/NB_mxc6ddG-800.jpeg" 
-                    alt="Thumbnail of EHQ-Admin_Theme_Modal_4_Banner&More.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">EHQ ADMIN THEME MODAL 4 BANNER&MORE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/JlAgwZ-sdt-800.jpeg" 
-                    alt="Thumbnail of political-poster.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">POLITICAL POSTER</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/YPmW48Vwm2-518.jpeg" 
-                    alt="Thumbnail of fun-tomato-movie.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FUN TOMATO MOVIE</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/TIMPFJklcU-800.jpeg" 
-                    alt="Thumbnail of malayalam-sha.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MALAYALAM SHA</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/03lAqxILI4-800.jpeg" 
-                    alt="Thumbnail of open-streetmap-kerala-final.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">OPEN STREETMAP KERALA FINAL</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/p_rlv1onvR-800.jpeg" 
-                    alt="Thumbnail of nm-group-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NM GROUP LOGO</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Ub5TdJwoR3-521.jpeg" 
-                    alt="Thumbnail of beefup-poster-online.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BEEFUP POSTER ONLINE</span>
+                    <span class="item-title">WIKIPEDIA OFFLINE CD PRINT</span>
                     <span class="item-folder">2009</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item wide hidden" role="listitem" data-index="50">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/xOWw-sjjg1-800.jpeg" 
-                    alt="Thumbnail of indic-law-logo.png"
+                    src="/images/thumbnails/pYIKe4IP2p-600.jpeg" 
+                    alt="Thumbnail of salucci-by-pullman-branding.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">INDIC LAW LOGO</span>
-                    <span class="item-folder">2023</span>
+                    <span class="item-title">SALUCCI BY PULLMAN BRANDING</span>
+                    <span class="item-folder">2011</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
+        </article><article class="item hidden" role="listitem" data-index="51">
             <div class="item-link">
                 <img 
-                    src="/images/thumbnails/wGs66kTaMP-800.jpeg" 
-                    alt="Thumbnail of print-dialog-1.png"
+                    src="/images/thumbnails/IKulJrpvlt-600.jpeg" 
+                    alt="Thumbnail of malayalam-caligraphy-la.png"
                     width="256"
                     height="256"
                     loading="lazy"
                     decoding="async">
                 <div class="item-info">
-                    <span class="item-title">PRINT DIALOG 1</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/kJRX7SrEGY-800.jpeg" 
-                    alt="Thumbnail of dyuthi-font-showcase.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DYUTHI FONT SHOWCASE</span>
-                    <span class="item-folder">2009</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/860R-hyqyC-180.jpeg" 
-                    alt="Thumbnail of promographics.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PROMOGRAPHICS</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/EPCtIavGQh-800.jpeg" 
-                    alt="Thumbnail of Coral-Bay-Theme-With-Title.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CORAL BAY THEME WITH TITLE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/vPlNzAT647-800.jpeg" 
-                    alt="Thumbnail of smc-fonts-listing.gif"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC FONTS LISTING.GIF</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Tg84wrsOkn-800.jpeg" 
-                    alt="Thumbnail of noba-icon.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NOBA ICON</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/deSQRzm6ZJ-800.jpeg" 
-                    alt="Thumbnail of front-direct.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FRONT DIRECT</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/WYPq1AY3JQ-800.jpeg" 
-                    alt="Thumbnail of Cinephile_Home SignIn.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CINEPHILE HOME SIGNIN</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/VEl4nRlCOn-800.jpeg" 
-                    alt="Thumbnail of open-streetmap-alt-color.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">OPEN STREETMAP ALT COLOR</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Ov-ZtspZzq-800.jpeg" 
-                    alt="Thumbnail of MM-Book-Cover.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MM BOOK COVER</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/THvbHFXxtw-800.jpeg" 
-                    alt="Thumbnail of grandham-ui-home.gif"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">GRANDHAM UI HOME.GIF</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/e3TSSx_UYk-800.jpeg" 
-                    alt="Thumbnail of suvarna-news-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SUVARNA NEWS UI</span>
+                    <span class="item-title">MALAYALAM CALIGRAPHY LA</span>
                     <span class="item-folder">2018</span>
                 </div>
             </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/DovDjTJIB8-531.jpeg" 
-                    alt="Thumbnail of Lakshmi-Card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LAKSHMI CARD</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/PB3bVmmgPE-800.jpeg" 
-                    alt="Thumbnail of meenaviyal-site-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MEENAVIYAL SITE UI</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/mC1WsMIt57-800.jpeg" 
-                    alt="Thumbnail of attrito-blue-whitebg.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ATTRITO BLUE WHITEBG</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ixJ15c_0kD-800.jpeg" 
-                    alt="Thumbnail of iv.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">IV</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/MQp55RmjFM-565.jpeg" 
-                    alt="Thumbnail of Appu-Card-Final-Mobile.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">APPU CARD FINAL MOBILE</span>
-                    <span class="item-folder">2016</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/6z49nvJ4bL-800.jpeg" 
-                    alt="Thumbnail of malayalam-news-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MALAYALAM NEWS LOGO</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/t1wkwRoS4U-800.jpeg" 
-                    alt="Thumbnail of indic-computing-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">INDIC COMPUTING LOGO</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/UqowlVvmKC-800.jpeg" 
-                    alt="Thumbnail of swathicard-print-line.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SWATHICARD PRINT LINE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/2N87hDbV48-800.jpeg" 
-                    alt="Thumbnail of priyadarshanweb_iidea.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PRIYADARSHANWEB IIDEA</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/TOdCw4OK1D-800.jpeg" 
-                    alt="Thumbnail of we-the-womeni-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">WE THE WOMENI UI</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/CJ9X6e9rYz-800.jpeg" 
-                    alt="Thumbnail of nandu-ham-stickers.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NANDU HAM STICKERS</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/mpkyrn9aBN-800.jpeg" 
-                    alt="Thumbnail of pullman-logo-3.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PULLMAN LOGO 3</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/6q93xumcMA-800.jpeg" 
-                    alt="Thumbnail of 7. Mockup.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">7. MOCKUP</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/iOZWNF60Pi-630.jpeg" 
-                    alt="Thumbnail of cliche-productions.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CLICHE PRODUCTIONS</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/aHgAAzbPT7-800.jpeg" 
-                    alt="Thumbnail of pamper-app-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PAMPER APP LOGO</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/eyqZuVm8s9-800.jpeg" 
-                    alt="Thumbnail of widgets-videos-gallery-view.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">WIDGETS VIDEOS GALLERY VIEW</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ccxvYY8dLQ-800.jpeg" 
-                    alt="Thumbnail of rufscript-showcase.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">RUFSCRIPT SHOWCASE</span>
-                    <span class="item-folder">2008</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/x2YDGMpgdF-800.jpeg" 
-                    alt="Thumbnail of Instagram post - 2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">INSTAGRAM POST   2</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/dzUR5HeQXg-454.jpeg" 
-                    alt="Thumbnail of lbc-poster.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LBC POSTER</span>
-                    <span class="item-folder">2020</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/8bxOLX3lqg-800.jpeg" 
-                    alt="Thumbnail of mindhelix-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MINDHELIX LOGO</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/FLQY5AyERN-800.jpeg" 
-                    alt="Thumbnail of book-cover-two-front.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BOOK COVER TWO FRONT</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/yNgL5flXHZ-800.jpeg" 
-                    alt="Thumbnail of namma-khasak-image.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NAMMA KHASAK IMAGE</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/F50yecKaMA-568.jpeg" 
-                    alt="Thumbnail of center_a_logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CENTER A LOGO</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/nr88aH4atg-800.jpeg" 
-                    alt="Thumbnail of crs-logo-cleanup.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CRS LOGO CLEANUP</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/E1aL9NbuXq-800.jpeg" 
-                    alt="Thumbnail of fortis-dashboard.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FORTIS DASHBOARD</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/nnTTkf7QfQ-800.jpeg" 
-                    alt="Thumbnail of malayalam-ka.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MALAYALAM KA</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/g90G2IUUDz-800.jpeg" 
-                    alt="Thumbnail of kkpp-malayalam-tee.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">KKPP MALAYALAM TEE</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/7RQcktY6EL-413.jpeg" 
-                    alt="Thumbnail of rumor-logo-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">RUMOR LOGO 2</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/kk7FgZSGQi-800.jpeg" 
-                    alt="Thumbnail of smc-tee-black.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC TEE BLACK</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/iNomRy2-1f-800.jpeg" 
-                    alt="Thumbnail of mayalogo-02.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MAYALOGO 02</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/v1nPPZbvtS-800.jpeg" 
-                    alt="Thumbnail of nm-property-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NM PROPERTY LOGO</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/GTIqaQtAvb-300.jpeg" 
-                    alt="Thumbnail of anand-neethu-stamp.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ANAND NEETHU STAMP</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/tUXNOxH4XF-800.jpeg" 
-                    alt="Thumbnail of liberty-videocon-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LIBERTY VIDEOCON UI</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/E6PDVpX3fU-800.jpeg" 
-                    alt="Thumbnail of smc-book-3.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC BOOK 3</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/wmMqVP5-em-800.jpeg" 
-                    alt="Thumbnail of smc-book-1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC BOOK 1</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Szbo8xwNKv-800.jpeg" 
-                    alt="Thumbnail of Torquay.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">TORQUAY</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/HKcM1UF2No-800.jpeg" 
-                    alt="Thumbnail of fortis-microsite.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FORTIS MICROSITE</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/8lva7GV2Zz-360.jpeg" 
-                    alt="Thumbnail of shiili-wedding-got.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SHIILI WEDDING GOT</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/YkaL3UvoTH-800.jpeg" 
-                    alt="Thumbnail of duo-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DUO UI</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/0WVg3PwqXr-276.jpeg" 
-                    alt="Thumbnail of anish-drupal-card.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ANISH DRUPAL CARD</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/fVtwkSPt0v-800.jpeg" 
-                    alt="Thumbnail of vc.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">VC</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/BgBEXQw98q-800.jpeg" 
-                    alt="Thumbnail of mathai-logo.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MATHAI LOGO</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/bsNtowu9Oi-800.jpeg" 
-                    alt="Thumbnail of akashamittayi-malayalam-type.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">AKASHAMITTAYI MALAYALAM TYPE</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/U9F9bqotdW-800.jpeg" 
-                    alt="Thumbnail of poorna-keyboard-icon.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">POORNA KEYBOARD ICON</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/a8E8sSqVQ6-800.jpeg" 
-                    alt="Thumbnail of smc_font_workshop_poster_long.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC FONT WORKSHOP POSTER LONG</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/qbFdhMXLqv-800.jpeg" 
-                    alt="Thumbnail of all-stamps.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ALL STAMPS</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ayFVAOCpvk-800.jpeg" 
-                    alt="Thumbnail of spara-character.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SPARA CHARACTER</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/_slkHs2tzD-641.jpeg" 
-                    alt="Thumbnail of brandelogowhite.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BRANDELOGOWHITE</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/dtFGJjWDMB-800.jpeg" 
-                    alt="Thumbnail of story-monk-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">STORY MONK LOGO</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/KYv0uud7JQ-800.jpeg" 
-                    alt="Thumbnail of genunited-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">GENUNITED LOGO</span>
-                    <span class="item-folder">2012</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/_uY4JY8Men-800.jpeg" 
-                    alt="Thumbnail of blue-bream-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BLUE BREAM LOGO</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/ah72vtlGqb-392.jpeg" 
-                    alt="Thumbnail of cof.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">COF</span>
-                    <span class="item-folder">2010</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/IsSD4kmvgA-800.jpeg" 
-                    alt="Thumbnail of payyans-icon.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PAYYANS ICON</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/h_CdukPKKu-800.jpeg" 
-                    alt="Thumbnail of book-cover-one-front.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BOOK COVER ONE FRONT</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/a4k5kV8ACh-784.jpeg" 
-                    alt="Thumbnail of LGBTee_Red_Reference.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">LGBTEE RED REFERENCE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/fS310L5qjY-800.jpeg" 
-                    alt="Thumbnail of malayalam-la.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MALAYALAM LA</span>
-                    <span class="item-folder">2019</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/trJh0u7ojk-800.jpeg" 
-                    alt="Thumbnail of indiclogo-01.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">INDICLOGO 01</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/P30Ewjeqes-792.jpeg" 
-                    alt="Thumbnail of nanma-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NANMA LOGO</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/kSTd3I5Edf-800.jpeg" 
-                    alt="Thumbnail of swathicard-print-cover.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SWATHICARD PRINT COVER</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/QS9dpJ9Wu2-493.jpeg" 
-                    alt="Thumbnail of fishpond-logo-cleanup.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FISHPOND LOGO CLEANUP</span>
-                    <span class="item-folder">2009</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/tDAJi9veKM-800.jpeg" 
-                    alt="Thumbnail of smc-glyphs.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC GLYPHS</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/1IFN06Yj69-800.jpeg" 
-                    alt="Thumbnail of moobile-event-identity.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">MOOBILE EVENT IDENTITY</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/326EMkFe6U-800.jpeg" 
-                    alt="Thumbnail of akashamittayi-malayalam-short.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">AKASHAMITTAYI MALAYALAM SHORT</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/BlSMjV9kqY-800.jpeg" 
-                    alt="Thumbnail of akashamittayi-malayalam-photo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">AKASHAMITTAYI MALAYALAM PHOTO</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/seTMPCdUWQ-800.jpeg" 
-                    alt="Thumbnail of payyans-ui-1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PAYYANS UI 1</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/LCqGvs-jVX-800.jpeg" 
-                    alt="Thumbnail of Design-2-HomePage.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DESIGN 2 HOMEPAGE</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/lQoxCcQcuH-678.jpeg" 
-                    alt="Thumbnail of received_m_id_220031634872028_0.jpeg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">RECEIVED M ID 220031634872028 0.JPEG</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/AGR2ohHbQG-800.jpeg" 
-                    alt="Thumbnail of chalimachine-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CHALIMACHINE LOGO</span>
-                    <span class="item-folder">2016</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/tYeTA0jIQa-434.jpeg" 
-                    alt="Thumbnail of smt-id-card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMT ID CARD</span>
-                    <span class="item-folder">2013</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/2yMH8mVFVP-800.jpeg" 
-                    alt="Thumbnail of namma-khasak.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NAMMA KHASAK</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/oEdJ_IIr11-800.jpeg" 
-                    alt="Thumbnail of potmax-logos.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">POTMAX LOGOS</span>
-                    <span class="item-folder">2011</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/IRjeAGP0Qu-800.jpeg" 
-                    alt="Thumbnail of december-branding.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DECEMBER BRANDING</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/YGgdwabyQf-800.jpeg" 
-                    alt="Thumbnail of pathimuraja-book-cover-title.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PATHIMURAJA BOOK COVER TITLE</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/PVqzLOzvEL-800.jpeg" 
-                    alt="Thumbnail of chali-machine-ui.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CHALI MACHINE UI</span>
-                    <span class="item-folder">2016</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/lqGDwBx3Yy-800.jpeg" 
-                    alt="Thumbnail of rejected-logo-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">REJECTED LOGO 2</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/JzN3vmiSrQ-800.jpeg" 
-                    alt="Thumbnail of smc-fonts-home.gif"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC FONTS HOME.GIF</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/-iN_p1161--540.jpeg" 
-                    alt="Thumbnail of Book-Cover-Small.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BOOK COVER SMALL</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/27WQ2mjPYn-800.jpeg" 
-                    alt="Thumbnail of FacebookCover-SaveInternet.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FACEBOOKCOVER SAVEINTERNET</span>
-                    <span class="item-folder">2015</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/RoFhIyuCN7-800.jpeg" 
-                    alt="Thumbnail of copyleft-malayalm-podcast.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">COPYLEFT MALAYALM PODCAST</span>
-                    <span class="item-folder">2020</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/NWuyCk0dB--800.jpeg" 
-                    alt="Thumbnail of ML.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">ML</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/3thj_W3VNZ-512.jpeg" 
-                    alt="Thumbnail of varnam-logo-mobile.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">VARNAM LOGO MOBILE</span>
-                    <span class="item-folder">2016</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/9o5_e5Qy2K-800.jpeg" 
-                    alt="Thumbnail of side-talk-branding.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SIDE TALK BRANDING</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/xRgiJav-S5-800.jpeg" 
-                    alt="Thumbnail of undercover-brand-1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">UNDERCOVER BRAND 1</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/s116YRNcv6-800.jpeg" 
-                    alt="Thumbnail of undercover-brand-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">UNDERCOVER BRAND 2</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/IIS0-drI5h-640.jpeg" 
-                    alt="Thumbnail of Sruthi Card.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SRUTHI CARD</span>
-                    <span class="item-folder">2020</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Bc-b1mI71Q-800.jpeg" 
-                    alt="Thumbnail of soappiness-lemongrass.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SOAPPINESS LEMONGRASS</span>
-                    <span class="item-folder">2018</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/H3pXnt4WDT-800.jpeg" 
-                    alt="Thumbnail of founder-house-brand.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">FOUNDER HOUSE BRAND</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/MoR86Cv6mL-800.jpeg" 
-                    alt="Thumbnail of payyans-ui-2.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">PAYYANS UI 2</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Tj9kYxYxBJ-375.jpeg" 
-                    alt="Thumbnail of skin-talk-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SKIN TALK LOGO</span>
-                    <span class="item-folder">2022</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/Q946sSOqEU-800.jpeg" 
-                    alt="Thumbnail of horeca-sample.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">HORECA SAMPLE</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/0T0bbJVk6Y-800.jpeg" 
-                    alt="Thumbnail of noba-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">NOBA LOGO</span>
-                    <span class="item-folder">2023</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/9Q3gNs3J8s-800.jpeg" 
-                    alt="Thumbnail of drupal-trivandrum-sticker.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">DRUPAL TRIVANDRUM STICKER</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/tvwKzYPFs9-685.jpeg" 
-                    alt="Thumbnail of calendar-ui-1.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">CALENDAR UI 1</span>
-                    <span class="item-folder">2024</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/YPbtNMrQ55-800.jpeg" 
-                    alt="Thumbnail of Timon.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">TIMON</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article><article class="item wide" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/V6QPNP7RZJ-800.jpeg" 
-                    alt="Thumbnail of buy-horec-logo.png"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">BUY HOREC LOGO</span>
-                    <span class="item-folder">2017</span>
-                </div>
-            </div>
-        </article><article class="item" role="listitem">
-            <div class="item-link">
-                <img 
-                    src="/images/thumbnails/rDEbqsjrVO-800.jpeg" 
-                    alt="Thumbnail of smc-links-banner.jpg"
-                    width="256"
-                    height="256"
-                    loading="lazy"
-                    decoding="async">
-                <div class="item-info">
-                    <span class="item-title">SMC LINKS BANNER</span>
-                    <span class="item-folder">2014</span>
-                </div>
-            </div>
-        </article></div>
-</main>
+        </article></div><div class="load-more">
+        <button id="loadMore" class="load-more-button">Load More</button>
+    </div></main>
+<footer>
+    <div class="footer-content">
+        <div class="footer-text">Design Sans Dialogue</div>
+        <div class="footer-text"><a href="https://www.11ty.dev/">11ty</a> + <a href="https://fonts.google.com/specimen/Space+Grotesk">Space Grotesk</a> </div>
+        <div class="footer-text"><a href="https://github.com/hfactor/found/">Source Code</a></div>
+    </div>
+</footer>
+<script>
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    const totalItems = 51;
+    
+    document.getElementById('loadMore').onclick = function() {
+        currentPage++;
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        
+        document.querySelectorAll('.item.hidden').forEach(item => {
+            const index = parseInt(item.dataset.index);
+            if (index > start && index <= end) {
+                item.classList.remove('hidden');
+                item.classList.add('loaded');
+            }
+        });
+        
+        // Hide button if we've shown all items
+        if (end >= totalItems) {
+            this.style.display = 'none';
+        }
+    };
+</script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
 </body>
 </html>
