@@ -7,24 +7,18 @@
     <meta name="theme-color" content="#F7F7F7">
     <title>{{ title }}</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --color-background: #F7F7F7;
-            --color-brand: #EB5503;
+            --color-background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
             --color-text: #141414;
-            --color-subtext: #949494;
-            --spacing-base: 14px;
-            --spacing-double: 32px;
-            --grid-item-size: 128px;
-            --font-size-base: 14px;
-            --font-size-large: 16px;
+            --spacing: 16px;
+            --font-size: 14px;
+            --font-family: 'Space Grotesk', sans-serif;
+            --max-width: 900px;
         }
 
-        /* Reset and base styles */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -34,11 +28,10 @@
         body {
             background: var(--color-background);
             color: var(--color-text);
-            font-family: 'Silkscreen', sans-serif;
-            font-size: var(--font-size-base);
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            font-weight: 300;
             line-height: 1.2;
-            padding: var(--spacing-double);
-            margin: 0;
         }
 
         img {
@@ -47,222 +40,186 @@
             height: auto;
         }
 
-        /* Typography */
-        h1, h2 {
-            font-size: var(--font-size-large);
-            font-weight: 400;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        /* Layout Components */
-        .controls {
-            padding: var(--spacing-base);
-            padding-top: 0;
-            margin-bottom: var(--spacing-double);
+        header, footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
-        .controls h1 {
+        .title {
+            font-size: clamp(40px, 15vw, 220px);
+            font-weight: 100;
             margin: 0;
+            line-height: 1;
+            letter-spacing: -0.11em;
         }
 
-        .folder {
-            margin-bottom: var(--spacing-double);
+        .title::after {
+            content: "_";
+            animation: blink 1s step-end infinite;
         }
 
-        .folder-title {
-            padding: 0 var(--spacing-base);
-            margin-bottom: var(--spacing-base);
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* Grid Layout */
+        .description {
+            max-width: 600px;
+            color: var(--color-text);
+            font-weight: 300;
+            font-size: var(--font-size);
+        }
+
+        .description a {
+            text-decoration: underline;
+            color: var(--color-text);
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
-            gap: var(--spacing-double);
-            padding: 0 var(--spacing-base);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
-
         .item {
-            aspect-ratio: 1;
-            background-color: #eee;
-            transition: all 0.2s ease;
-            overflow: hidden;
             position: relative;
-        }
-
-        .item-link {
-            display: flex;
+            width: 100%;
             height: 100%;
-            position: relative;
-            align-items: center;
-            justify-content: center;
+            opacity: 1;
+            transition: none;
+            font-weight: 700;
         }
-
+        .item-2x2 {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .item-link {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: default;
+        }
         .item-link img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.2s ease;
+            display: block;
+            pointer-events: none;
+            border: none;
+            background: none;
         }
-
-        .item:hover {
-            border: 1px solid var(--color-brand);
-        }
-
-        .item:hover .item-link img {
-            object-fit: contain;
-            padding: 4px;
-            background-color: #eee;
-        }
-
-        .item-link:focus-visible {
-            outline: 4px solid var(--color-brand);
-            outline-offset: 4px;
-        }
-
-        /* Footer */
-        footer {
-            padding: var(--spacing-double) var(--spacing-base);
+        .item-info {
+            position: absolute;
+            top: var(--spacing);
+            left: var(--spacing);
+            color: #8c8c8c;
+            font-size: var(--font-size);
+            font-weight: 300;
             text-align: left;
-            color: var(--color-subtext);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 1;
+        }
+        .item:hover .item-info {
+            opacity: 1;
+        }
+        .item-title {
+            display: inline;
+        }
+        .item-folder {
+            display: inline;
+        }
+        .item-folder::before {
+            content: " • ";
+        }
+        .empty {
+            background: none;
+            border: none;
+            pointer-events: none;
         }
 
-        footer a {
-            text-decoration: underline;
-        }
-
-        footer a:hover,
-        footer a:focus-visible {
-            color: var(--color-brand);
-        }
-
-        /* Mobile Optimizations */
         @media (max-width: 768px) {
-            :root {
-                --spacing-base: 12px;
-                --spacing-double: 24px;
-            }
-
-            body {
-                padding: var(--spacing-base);
-            }
-
-            .controls {
+            header, footer {
                 flex-direction: column;
+                gap: var(--spacing);
                 align-items: flex-start;
-                gap: var(--spacing-base);
-            }
-
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--spacing-base);
             }
         }
 
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .item, .item-link img {
-                transition: none;
-            }
-        }
-
-        /* Print Styles */
         @media print {
             body {
                 background: none;
             }
-
-            .item:hover {
-                border: none;
-            }
-
-            .item:hover img {
-                object-fit: cover;
-                padding: 0;
-            }
         }
 
-        /* Modal Styles */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(20, 20, 20, 0.95);
-            z-index: 1000;
-        }
-
-        .image-modal.active {
+        footer {
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-        }
-
-        .modal-image {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .close-button {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: var(--color-background);
-            font-family: 'Silkscreen', sans-serif;
-            font-size: var(--font-size-large);
-            cursor: pointer;
-            padding: var(--spacing-base);
-            border: none;
-            background: none;
-        }
-
-        .navigation {
-            position: absolute;
-            top: 50%;
+            justify-content: space-between;
             width: 100%;
+        }
+
+        .footer-content {
             display: flex;
             justify-content: space-between;
-            transform: translateY(-50%);
-            pointer-events: none;
-            padding: 0 var(--spacing-base);
+            width: 100%;
+            gap: var(--spacing);
+            align-items: center;
         }
 
-        .nav-button {
-            background-color: transparent;
-            border: 1px solid var(--color-brand);
-            color: var(--color-background);
-            padding: var(--spacing-base);
-            cursor: pointer;
-            font-family: 'Silkscreen', sans-serif;
-            font-size: var(--font-size-large);
-            pointer-events: auto;
+        .footer-text {
+            font-size: var(--font-size);
+            font-weight: 300;
+            color: var(--color-text);
+            opacity: 0.8;
+        }
+
+        .footer-text a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .nav-button {
-                padding: calc(var(--spacing-base) / 2);
+            .footer-content {
+                flex-direction: column;
+                gap: 2px;
+                align-items: flex-start;
             }
-            
-            .close-button {
-                top: -35px;
-            }
+        }
+
+        .load-more {
+            padding: var(--spacing) 0;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 64px;
+        }
+
+        .load-more-button {
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            font-weight: 300;
+            cursor: pointer;
+            padding: 8px 16px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .load-more-button:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -270,100 +227,22 @@
     {{ content | safe }}
 
     <script>
-        class ImageModal {
-            constructor() {
-                this.modal = document.createElement('div');
-                this.modal.className = 'image-modal';
-                this.modal.innerHTML = `
-                    <div class="modal-content">
-                        <button class="close-button">×</button>
-                        <img class="modal-image" src="" alt="">
-                        <div class="navigation">
-                            <button class="nav-button prev">&lt;</button>
-                            <button class="nav-button next">&gt;</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(this.modal);
-                
-                this.currentImageIndex = 0;
-                this.images = [];
-                this.setupEventListeners();
-            }
-
-            setupEventListeners() {
-                this.modal.querySelector('.close-button').addEventListener('click', () => this.close());
-                
-                this.modal.addEventListener('click', (e) => {
-                    if (e.target === this.modal) this.close();
-                });
-
-                document.addEventListener('keydown', (e) => {
-                    if (!this.modal.classList.contains('active')) return;
-                    
-                    switch(e.key) {
-                        case 'Escape':
-                            this.close();
-                            break;
-                        case 'ArrowLeft':
-                            this.navigate(-1);
-                            break;
-                        case 'ArrowRight':
-                            this.navigate(1);
-                            break;
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
                     }
                 });
+            }, {
+                threshold: 0.1
+            });
 
-                this.modal.querySelector('.prev').addEventListener('click', () => this.navigate(-1));
-                this.modal.querySelector('.next').addEventListener('click', () => this.navigate(1));
-            }
-
-            open(imageSrc, allImages) {
-                this.images = allImages;
-                this.currentImageIndex = this.images.findIndex(img => img.path === imageSrc);
-                this.updateImage();
-                this.modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            close() {
-                this.modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            navigate(direction) {
-                this.currentImageIndex = (this.currentImageIndex + direction + this.images.length) % this.images.length;
-                this.updateImage();
-            }
-
-            updateImage() {
-                const currentImage = this.images[this.currentImageIndex];
-                const modalImage = this.modal.querySelector('.modal-image');
-                modalImage.src = currentImage.path;
-                modalImage.alt = currentImage.name;
-            }
-        }
-
-        // Initialize modal
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = new ImageModal();
-            
-            // Add click listeners to all gallery images
-            document.querySelectorAll('.item-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const folder = link.closest('.folder');
-                    const allImages = Array.from(folder.querySelectorAll('.item-link'))
-                        .map(link => ({
-                            path: link.href,
-                            name: link.querySelector('img').alt
-                        }));
-                    modal.open(link.href, allImages);
-                });
+            document.querySelectorAll('.item').forEach(item => {
+                observer.observe(item);
             });
         });
     </script>
-    <!-- 100% privacy-first analytics -->
-    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
 </html>

@@ -1,37 +1,73 @@
 ---
 layout: layout.njk
-title: The Found*
+title: made
 description: Collection of my design work since 2007, presented without commentary.
 
 ---
-<header class="controls">
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
+<header>
+    <h1 class="title">{{ title }}</h1>
+    <div class="description">
+    I don’t have a polished portfolio—just pieces I’ve made that ended up here. No stories, no process write-ups. Just work. I’ll keep this page growing. If I missed something you remember, feel free to <a href="mailto:hiran.v@gmail.com">share</a> it.  
+    </div>
 </header>
 
 <main>
-{%- for folder in imagesByFolder -%}
-    <section class="folder" aria-labelledby="folder-{{ folder.name | slug }}">
-        <h2 id="folder-{{ folder.name | slug }}" class="folder-title">{{ folder.name }}</h2>
-        <div class="items grid" role="list">{%- for image in folder.files -%}
-            <article class="item" role="listitem">
-                <a href="{{ image.path }}" title="View {{ image.name }}" class="item-link">
-                    <img 
-                        src="{{ image.thumbnail }}" 
-                        alt="Thumbnail of {{ image.name }}"
-                        width="256"
-                        height="256"
-                        loading="lazy"
-                        decoding="async">
-                </a>
-            </article>
-        {%- endfor -%}</div>
-    </section>
-{%- endfor -%}
+    <div class="items grid" role="list">
+    {%- for image in collections.allImages -%}
+        {%- assign mod7 = forloop.index0 | modulo: 7 -%}
+        <article class="item{% if mod7 == 0 %} item-2x2{% endif %}{% if forloop.index > 10 %} hidden{% endif %}" role="listitem" data-index="{{ forloop.index }}">
+            <div class="item-link">
+                <img 
+                    src="{{ image.thumbnail }}" 
+                    alt="Thumbnail of {{ image.name }}"
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    decoding="async">
+                <div class="item-info">
+                    <span class="item-title">{{ image.name | replace: "-", " " | replace: "_", " " | replace: ".jpg", "" | replace: ".png", "" | upcase }}</span>
+                    <span class="item-folder">{{ image.folder | upcase }}</span>
+                </div>
+            </div>
+        </article>
+    {%- endfor -%}
+    </div>
+    {%- if collections.allImages.size > 10 -%}
+    <div class="load-more">
+        <button id="loadMore" class="load-more-button">Load More</button>
+    </div>
+    {%- endif -%}
 </main>
 
 <footer>
-    <nav aria-label="Site links">
-    I never had a complete portfolio - building one feels hard and context seems irrelevant now. This is my attempt to break free from perfectionism: just raw designs as they are, found scattered across old chats, emails, and hard drives. A work in progress, updated whenever I discover more. If you have any of my designs tucked away somewhere or spot any issues, <a href="mailto:hiran.v@gmail.com">drop me a mail</a>. Inspired by <a href="https://d.rsms.me/stuff/">RSMS's Stuff</a>. <a href="https://github.com/hfactor/found/">Source</a>.
-    </nav>
+    <div class="footer-content">
+        <div class="footer-text">Design Sans Dialogue</div>
+        <div class="footer-text"><a href="https://www.11ty.dev/">11ty</a> + <a href="https://fonts.google.com/specimen/Space+Grotesk">Space Grotesk</a> </div>
+        <div class="footer-text"><a href="https://github.com/hfactor/found/">Source Code</a></div>
+    </div>
 </footer>
+
+<script>
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    const totalItems = {{ collections.allImages.size }};
+    
+    document.getElementById('loadMore').onclick = function() {
+        currentPage++;
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        
+        document.querySelectorAll('.item.hidden').forEach(item => {
+            const index = parseInt(item.dataset.index);
+            if (index > start && index <= end) {
+                item.classList.remove('hidden');
+                item.classList.add('loaded');
+            }
+        });
+        
+        // Hide button if we've shown all items
+        if (end >= totalItems) {
+            this.style.display = 'none';
+        }
+    };
+</script>
