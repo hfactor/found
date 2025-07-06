@@ -1,21 +1,21 @@
 ---
 layout: layout.njk
-title: made_
+title: made
 description: Collection of my design work since 2007, presented without commentary.
 
 ---
 <header>
     <h1 class="title">{{ title }}</h1>
     <div class="description">
-    I never kept a portfolio. This is where some of them ended up. No context, no case studies. Just pieces of work, scattered over time. I’ll keep adding more. If you’ve got something I missed, <a href="mailto:hiran.v@gmail.com">send it over.</a>. 
+    I don’t have a polished portfolio—just pieces I’ve made that ended up here. No stories, no process write-ups. Just work. I’ll keep this page growing. If I missed something you remember, feel free to <a href="mailto:hiran.v@gmail.com">share</a> it.  
     </div>
 </header>
 
 <main>
     <div class="items grid" role="list">
     {%- for image in collections.allImages -%}
-        {%- assign remainder = forloop.index | modulo: 5 -%}
-        <article class="item{% if remainder == 0 %} wide{% endif %}{% if forloop.index > 10 %} hidden{% endif %}" role="listitem" data-index="{{ forloop.index }}">
+        {%- assign mod7 = forloop.index0 | modulo: 7 -%}
+        <article class="item{% if mod7 == 0 %} item-2x2{% endif %}{% if forloop.index > 10 %} hidden{% endif %}" role="listitem" data-index="{{ forloop.index }}">
             <div class="item-link">
                 <img 
                     src="{{ image.thumbnail }}" 
