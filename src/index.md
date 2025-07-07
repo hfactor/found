@@ -7,7 +7,7 @@ description: Collection of my design work since 2007, presented without commenta
 <header>
     <h1 class="title">{{ title }}</h1>
     <div class="description">
-    I don’t have a polished portfolio—just pieces I’ve made that ended up here. No stories, no process write-ups. Just work. I’ll keep this page growing. If I missed something you remember, feel free to <a href="mailto:hiran.v@gmail.com">share</a> it.  
+    I don't have a polished portfolio - just pieces. I've made that ended up here. No stories, no process write-ups. Just work. I'll keep this page growing. If I missed something you remember, feel free to <a href="mailto:hiran.v@gmail.com">share</a> it.  
     </div>
 </header>
 
@@ -15,7 +15,7 @@ description: Collection of my design work since 2007, presented without commenta
     <div class="items grid" role="list">
     {%- for image in collections.allImages -%}
         {%- assign mod7 = forloop.index0 | modulo: 7 -%}
-        <article class="item{% if mod7 == 0 %} item-2x2{% endif %}{% if forloop.index > 10 %} hidden{% endif %}" role="listitem" data-index="{{ forloop.index }}">
+        <article class="item{% if mod7 == 0 %} item-2x2{% endif %}" role="listitem" data-index="{{ forloop.index }}">
             <div class="item-link">
                 <img 
                     src="{{ image.thumbnail }}" 
@@ -32,11 +32,6 @@ description: Collection of my design work since 2007, presented without commenta
         </article>
     {%- endfor -%}
     </div>
-    {%- if collections.allImages.size > 10 -%}
-    <div class="load-more">
-        <button id="loadMore" class="load-more-button">Load More</button>
-    </div>
-    {%- endif -%}
 </main>
 
 <footer>
@@ -46,28 +41,3 @@ description: Collection of my design work since 2007, presented without commenta
         <div class="footer-text"><a href="https://github.com/hfactor/found/">Source Code</a></div>
     </div>
 </footer>
-
-<script>
-    let currentPage = 1;
-    const itemsPerPage = 10;
-    const totalItems = {{ collections.allImages.size }};
-    
-    document.getElementById('loadMore').onclick = function() {
-        currentPage++;
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        
-        document.querySelectorAll('.item.hidden').forEach(item => {
-            const index = parseInt(item.dataset.index);
-            if (index > start && index <= end) {
-                item.classList.remove('hidden');
-                item.classList.add('loaded');
-            }
-        });
-        
-        // Hide button if we've shown all items
-        if (end >= totalItems) {
-            this.style.display = 'none';
-        }
-    };
-</script>
